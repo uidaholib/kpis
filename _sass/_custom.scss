@@ -2,3 +2,49 @@
     Put your custom SCSS here! 
     This allows you to override any CollectionBuilder or Bootstrap CSS without modifying the base theme files directly.
 */
+.sidebar {
+    min-height: 100vh;
+    width: 250px;
+    transition: all 0.3s;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar .nav-link {
+    color: #333;
+    white-space: normal;
+    word-wrap: break-word;
+    padding: 8px 15px;
+    line-height: 1.2;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f8f9fa;
+}
+
+.menu-text {
+    transition: opacity 0.3s;
+    display: inline-block;
+    max-width: 180px;
+}
+
+.collapsed .menu-text {
+    opacity: 0;
+    display: none;
+}
+
+.nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.toggle-btn {
+    width: 100%;
+    text-align: right;
+    padding: 10px;
+    border: none;
+    background: none;
+}
