@@ -1,0 +1,40 @@
+---
+# generic page layout
+layout: default
+---
+<h2 class="ps-3 py-2">{{ page.title }}</h2>
+
+<div id="{{ page.dashboard.container_id }}"></div>
+
+<!-- Required libraries -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+<!-- Load dashboard template -->
+<script src="{{ '/assets/js/dashboard-template.js' | relative_url }}"></script>
+
+<!-- Initialize dashboard -->
+<script>
+window.addEventListener('load', async function() {
+    if (typeof KPIDashboard === 'undefined') {
+        console.error('Dashboard template failed to load');
+        return;
+    }
+
+    try {
+        const dashboard = new KPIDashboard({
+            containerId: '{{ page.dashboard.container_id }}',
+            dataSources: {{ page.dashboard.data_sources | jsonify }},
+            defaultFrequency: '{{ page.dashboard.default_frequency }}',
+            showFrequencyToggle: {{ page.dashboard.show_frequency_toggle }},
+            defaultTab: '{{ page.dashboard.default_tab }}',
+            showTable: {{ page.dashboard.show_table }},
+            tableColumns: {{ page.dashboard.table_columns | jsonify }},
+            chartTypes: {{ page.dashboard.charts | jsonify }}
+        });
+        
+        await dashboard.init();
+    } catch (error) {
+        console.error('Failed to initialize dashboard:', error);
+    }
+});</script>
