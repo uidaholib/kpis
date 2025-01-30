@@ -1,43 +1,140 @@
-// dashboard-base.js
+// dashboard-template.js
 
 window.KPIDashboard = class KPIDashboard {
     constructor(config) {
         this.config = {
             containerId: '',
-            dataSource: '',
-            frequency: 'yearly',
-            chartTypes: [],
-            toggleFrequency: false,
+            dataSources: {},
+            defaultFrequency: 'yearly',
+            showFrequencyToggle: false,
             defaultTab: 'chart',
+            showTable: true,
+            frequencies: ['yearly', 'monthly', 'triannual', 'biannual'],
             ...config
         };
         this.charts = [];
         this.container = document.getElementById(this.config.containerId);
         this.data = null;
-        this.dataType = 'standard'; // or 'fiscal'
+        this.currentFrequency = this.config.defaultFrequency;
+        
+        // Initialize the basic structure
+        this.initializeStructure();
+    }
+
+    initializeStructure() {
+        // Clear the container
+        this.container.innerHTML = '';
+
+        // Create toggle container
+        if (this.config.showFrequencyToggle) {
+            const toggleContainer = document.createElement('div');
+            toggleContainer.className = 'frequency-toggle-container mb-4';
+            this.container.appendChild(toggleContainer);
+        }
+
+        // Create content container
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'dashboard-content';
+        this.container.appendChild(contentContainer);
     }
 
     async init() {
         try {
-            await this.loadData();
-            // Detect data type based on column headers
-            this.detectDataType();
-            this.render();
+            await this.loadData(this.currentFrequency);
+            if (this.config.showFrequencyToggle) {
+                this.setupFrequencyToggle();
+            }
+            this.renderContent();
         } catch (error) {
             console.error('Error initializing dashboard:', error);
             this.showError('Failed to initialize dashboard');
         }
     }
 
-    detectDataType() {
-        if (!this.data || !this.data[0]) return;
-        const headers = Object.keys(this.data[0]);
-        this.dataType = headers.some(h => h.toLowerCase().startsWith('fy')) ? 'fiscal' : 'standard';
+    setupFrequencyToggle() {
+        const toggleContainer = this.container.querySelector('.frequency-toggle-container');
+        if (!toggleContainer) return;
+
+        // Only show frequencies that have corresponding data sources
+        const availableFrequencies = this.config.frequencies.filter(freq => 
+            this.config.dataSources[freq]
+        );
+
+        const buttons = availableFrequencies.map(freq => `
+            <input type="radio" class="btn-check" name="timeFormat" 
+                   id="${freq}" value="${freq}" 
+                   ${this.currentFrequency === freq ? 'checked' : ''}>
+            <label class="btn btn-outline-primary" for="${freq}">
+                ${this.getFrequencyLabel(freq)}
+            </label>
+        `).join('');
+
+        toggleContainer.innerHTML = `
+            <div class="d-flex justify-content-center">
+                <div class="btn-group shadow-sm rounded" role="group" aria-label="Time format toggle">
+                    ${buttons}
+                </div>
+            </div>
+        `;
+
+        // Add event listeners
+        toggleContainer.querySelectorAll('input[name="timeFormat"]').forEach(radio => {
+            radio.addEventListener('change', async (e) => {
+                this.currentFrequency = e.target.value;
+                await this.updateDashboard();
+            });
+        });
     }
 
-    async loadData() {
+    getFrequencyLabel(frequency) {
+        const labels = {
+            yearly: 'Yearly',
+            monthly: 'Monthly',
+            triannual: 'By Term',
+            biannual: 'By Semester'
+        };
+        return labels[frequency] || frequency;
+    }
+
+    async updateDashboard() {
         try {
-            const response = await fetch(this.config.dataSource + '.csv');
+            await this.loadData(this.currentFrequency);
+            this.destroyCharts();
+            this.renderContent();
+        } catch (error) {
+            console.error('Error updating dashboard:', error);
+            this.showError('Failed to update dashboard');
+        }
+    }
+
+    destroyCharts() {
+        this.charts.forEach(chart => chart.destroy());
+        this.charts = [];
+    }
+
+    parseTerm(term) {
+        // Extract term and year from strings like "Spring 2022"
+        const parts = term.split(' ');
+        const year = parseInt(parts[1]);
+        const termName = parts[0];
+        
+        // Assign numerical values for sorting
+        const termOrder = {
+            'Spring': 0,
+            'Summer': 1,
+            'Fall': 2
+        };
+
+        return {
+            year,
+            term: termName,
+            sortValue: year * 10 + termOrder[termName]
+        };
+    }
+
+    async loadData(frequency) {
+        try {
+            const response = await fetch(this.config.dataSources[frequency] + '.csv');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -49,6 +146,10 @@ window.KPIDashboard = class KPIDashboard {
                 transformHeader: header => header.trim() || 'metric',
                 transform: (value, column) => {
                     if (!value) return 0;
+                    // Handle currency values
+                    if (typeof value === 'string' && value.includes('$')) {
+                        return parseFloat(value.replace(/[$,]/g, ''));
+                    }
                     // Handle percentages
                     if (typeof value === 'string' && value.includes('%')) {
                         return parseFloat(value.replace('%', ''));
@@ -69,7 +170,6 @@ window.KPIDashboard = class KPIDashboard {
             });
 
             this.data = parseResult.data;
-            console.log('Loaded data:', this.data);
         } catch (error) {
             console.error('Error loading data:', error);
             throw error;
@@ -90,25 +190,60 @@ window.KPIDashboard = class KPIDashboard {
             const seconds = Math.floor(value % 60);
             return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
+        if (metricLower.includes('savings') || metricLower.includes('cost')) {
+            return new Intl.NumberFormat('en-US', { 
+                style: 'currency', 
+                currency: 'USD' 
+            }).format(value);
+        }
         // Format large numbers with commas
         return value.toLocaleString();
     }
 
     getDataColumns() {
         if (!this.data || !this.data[0]) return [];
-        return Object.keys(this.data[0]).filter(key => {
-            if (this.dataType === 'fiscal') {
-                return key.toLowerCase().startsWith('fy');
-            }
-            return !isNaN(parseInt(key)) || key.match(/\d{4}/);
-        }).sort();
+        const columns = Object.keys(this.data[0]).filter(key => key !== 'metric');
+        
+        // Sort columns appropriately based on frequency
+        switch (this.currentFrequency) {
+            case 'yearly':
+                return columns.sort();
+            case 'monthly':
+                return columns.sort((a, b) => new Date(a) - new Date(b));
+            case 'triannual':
+            case 'biannual':
+                return columns.sort((a, b) => {
+                    const termA = this.parseTerm(a);
+                    const termB = this.parseTerm(b);
+                    return termA.sortValue - termB.sortValue;
+                });
+            default:
+                return columns;
+        }
+    }
+
+    formatColumnLabel(column) {
+        switch (this.currentFrequency) {
+            case 'yearly':
+                return column.toLowerCase().startsWith('fy') ? `FY${column.slice(2)}` : column;
+            case 'monthly':
+                return new Date(column).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short' 
+                });
+            case 'triannual':
+            case 'biannual':
+                return column; // Keep original term format (e.g., "Spring 2022")
+            default:
+                return column;
+        }
     }
 
     processChartData(data, config) {
         const columns = this.getDataColumns();
         
         return {
-            labels: columns.map(col => this.dataType === 'fiscal' ? `FY${col.slice(2)}` : col),
+            labels: columns.map(col => this.formatColumnLabel(col)),
             datasets: config.datasets.map(dataset => {
                 const row = this.data[dataset.row_index];
                 return {
@@ -188,7 +323,7 @@ window.KPIDashboard = class KPIDashboard {
         // Add column headers
         columns.forEach(col => {
             const th = document.createElement('th');
-            th.textContent = this.dataType === 'fiscal' ? `FY${col.slice(2)}` : col;
+            th.textContent = this.formatColumnLabel(col);
             headerRow.appendChild(th);
         });
         
@@ -222,9 +357,12 @@ window.KPIDashboard = class KPIDashboard {
         return tableContainer;
     }
 
-    render() {
+    renderContent() {
+        const contentContainer = this.container.querySelector('.dashboard-content');
+        if (!contentContainer) return;
+
         if (this.config.showTable) {
-            this.container.innerHTML = `
+            contentContainer.innerHTML = `
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link ${this.config.defaultTab === 'chart' ? 'active' : ''}" 
@@ -261,7 +399,10 @@ window.KPIDashboard = class KPIDashboard {
     }
 
     renderCharts() {
-        const chartContainer = this.container.querySelector('#chart') || this.container;
+        const chartContainer = this.container.querySelector('#chart') || 
+                             this.container.querySelector('.dashboard-content');
+        if (!chartContainer) return;
+        
         chartContainer.innerHTML = '';
         
         this.config.chartTypes.forEach(chartConfig => {
@@ -272,18 +413,21 @@ window.KPIDashboard = class KPIDashboard {
 
     renderTable() {
         const tableContainer = this.container.querySelector('#table');
-        if (tableContainer) {
-            const table = this.createTable();
-            tableContainer.innerHTML = '';
-            tableContainer.appendChild(table);
-        }
+        if (!tableContainer) return;
+        
+        const table = this.createTable();
+        tableContainer.innerHTML = '';
+        tableContainer.appendChild(table);
     }
 
     showError(message) {
-        this.container.innerHTML = `
-            <div class="alert alert-danger" role="alert">
-                ${message}
-            </div>
-        `;
+        const contentContainer = this.container.querySelector('.dashboard-content');
+        if (contentContainer) {
+            contentContainer.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    ${message}
+                </div>
+            `;
+        }
     }
 };
