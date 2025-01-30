@@ -1,12 +1,14 @@
 ---
 title: Web Analytics
-layout: page
+layout: dashboard
 permalink: /web-analytics.html
 dashboard:
   container_id: webAnalytics
-  data_source: /assets/web-all-yearly
-  frequency: yearly
-  toggle_frequency: false
+  data_sources:
+    yearly: /assets/web-all-yearly
+    monthly: /assets/web-all-monthly
+  default_frequency: yearly
+  show_frequency_toggle: true
   default_tab: chart
   show_table: true
   table_columns:
@@ -50,38 +52,3 @@ dashboard:
           row_index: 7
           color: '#20c997'
 ---
-
-<div id="webAnalytics"></div>
-
-<!-- Required libraries -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-
-<!-- Load dashboard template -->
-<script src="{{ '/assets/js/dashboard-template.js' | relative_url }}"></script>
-
-<!-- Initialize dashboard -->
-<script>
-window.addEventListener('load', async function() {
-    if (typeof KPIDashboard === 'undefined') {
-        console.error('Dashboard template failed to load');
-        return;
-    }
-
-    try {
-        const dashboard = new KPIDashboard({
-            containerId: '{{ page.dashboard.container_id }}',
-            dataSource: '{{ page.dashboard.data_source }}',
-            frequency: '{{ page.dashboard.frequency }}',
-            toggleFrequency: {{ page.dashboard.toggle_frequency }},
-            defaultTab: '{{ page.dashboard.default_tab }}',
-            showTable: {{ page.dashboard.show_table }},
-            tableColumns: {{ page.dashboard.table_columns | jsonify }},
-            chartTypes: {{ page.dashboard.charts | jsonify }}
-        });
-        
-        await dashboard.init();
-    } catch (error) {
-        console.error('Failed to initialize dashboard:', error);
-    }
-});</script>
