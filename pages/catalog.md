@@ -5,7 +5,7 @@ permalink: /catalog.html
 dashboard:
   container_id: catalogStats
   data_sources:
-    triannual: /assets/catalog.csv
+    triannual: /kpidata/catalog.csv
   default_frequency: triannual
   show_frequency_toggle: false
   default_tab: chart

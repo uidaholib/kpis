@@ -377,15 +377,22 @@ getDataColumns() {
     createTable() {
         const tableContainer = document.createElement('div');
         tableContainer.className = 'table-responsive';
-
+    
         const table = document.createElement('table');
         table.className = 'table table-striped';
-
+    
         const thead = document.createElement('thead');
         const tbody = document.createElement('tbody');
-
-        // Create table header
+    
+        // Create table header with label column
         const headerRow = document.createElement('tr');
+        
+        // Add label column header
+        const labelHeader = document.createElement('th');
+        labelHeader.textContent = this.labelColumn || 'Metric';
+        headerRow.appendChild(labelHeader);
+    
+        // Add data columns
         const columns = this.getDataColumns();
         columns.forEach(column => {
             const th = document.createElement('th');
@@ -393,26 +400,34 @@ getDataColumns() {
             headerRow.appendChild(th);
         });
         thead.appendChild(headerRow);
-
-        // Create table body
+    
+        // Create table body with label column
         this.data.forEach(row => {
             const bodyRow = document.createElement('tr');
+            
+            // Add label column
+            const labelCell = document.createElement('td');
+            labelCell.textContent = row[this.labelColumn] || '';
+            bodyRow.appendChild(labelCell);
+    
+            // Add data columns
             columns.forEach(column => {
                 const td = document.createElement('td');
                 let value = row[column];
                 if (typeof value === 'string') {
                     value = value.replace(/[$,]/g, ''); // Remove dollar signs and commas
                 }
-                td.textContent = value;
+                td.textContent = this.formatValue(parseFloat(value) || 0, row[this.labelColumn]);
+                td.className = 'text-end'; // Right-align numeric data
                 bodyRow.appendChild(td);
             });
             tbody.appendChild(bodyRow);
         });
-
+    
         table.appendChild(thead);
         table.appendChild(tbody);
         tableContainer.appendChild(table);
-
+    
         return tableContainer;
     }
 
@@ -430,7 +445,7 @@ getDataColumns() {
     renderContent() {
         const contentContainer = this.container.querySelector('.dashboard-content');
         if (!contentContainer) return;
-
+    
         if (this.config.showTable) {
             contentContainer.innerHTML = `
                 <ul class="nav nav-tabs" role="tablist">
@@ -447,7 +462,7 @@ getDataColumns() {
                                 id="table-tab" data-bs-toggle="tab" data-bs-target="#table" 
                                 type="button" role="tab" aria-controls="table" 
                                 aria-selected="${this.config.defaultTab === 'table'}">
-                            Table
+                            Data
                         </button>
                     </li>
                 </ul>
@@ -461,11 +476,58 @@ getDataColumns() {
                 </div>
             `;
         }
-
+    
         this.renderCharts();
         if (this.config.showTable) {
             this.renderTable();
         }
+    }
+    
+    renderTable() {
+        const tableContainer = this.container.querySelector('#table');
+        if (!tableContainer) return;
+        
+        tableContainer.innerHTML = '';
+        
+        // Add download buttons
+        const downloadButtons = document.createElement('div');
+        downloadButtons.className = 'mb-3 d-flex gap-2 justify-content-end';
+        
+        // Create buttons for each data source
+        Object.entries(this.config.dataSources).forEach(([frequency, path]) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-outline-primary my-2';
+            btn.innerHTML = `<i class="bi bi-download me-2"></i>Download ${frequency.charAt(0).toUpperCase() + frequency.slice(1)} Data`;
+            
+            btn.addEventListener('click', async () => {
+                try {
+                    const response = await fetch(this.config.baseUrl + path);
+                    const csvText = await response.text();
+                    
+                    // Create blob and download
+                    const blob = new Blob([csvText], { type: 'text/csv' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = path.split('/').pop(); // Get filename from path
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                } catch (error) {
+                    console.error('Failed to download CSV:', error);
+                    alert('Failed to download CSV file');
+                }
+            });
+            
+            downloadButtons.appendChild(btn);
+        });
+        
+        tableContainer.appendChild(downloadButtons);
+        
+        // Create and add table
+        const table = this.createTable();
+        tableContainer.appendChild(table);
     }
 
     showError(message) {

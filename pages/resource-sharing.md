@@ -5,7 +5,7 @@ permalink: /resource-sharing.html
 dashboard:
   container_id: illStats
   data_sources:
-    triannual: /assets/resource-sharing.csv
+    triannual: /kpidata/resource-sharing.csv
   default_frequency: triannual
   show_frequency_toggle: false
   default_tab: chart

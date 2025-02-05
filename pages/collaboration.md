@@ -5,7 +5,7 @@ permalink: /collaboration.html
 dashboard:
   container_id: collaboration
   data_sources:
-    yearly: /assets/collaboration-yearly
+    yearly: /kpidata/collaboration-yearly
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart

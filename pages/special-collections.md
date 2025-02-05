@@ -5,7 +5,7 @@ permalink: /special-collections.html
 dashboard:
   container_id: specialCollections
   data_sources:
-    yearly: /assets/special-collections.csv
+    yearly: /kpidata/special-collections.csv
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart

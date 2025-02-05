@@ -5,7 +5,7 @@ permalink: /electronic-resources.html
 dashboard:
   container_id: electronicStats
   data_sources:
-    triannual: /assets/electronic-resources.csv
+    triannual: /kpidata/electronic-resources.csv
   default_frequency: triannual
   show_frequency_toggle: false
   default_tab: chart

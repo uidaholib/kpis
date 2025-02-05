@@ -5,7 +5,7 @@ permalink: /student-employment.html
 dashboard:
   container_id: studentEmployment
   data_sources:
-    yearly: /assets/student-employment.csv
+    yearly: /kpidata/student-employment.csv
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart

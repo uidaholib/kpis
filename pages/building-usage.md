@@ -5,7 +5,7 @@ permalink: /building-usage.html
 dashboard:
   container_id: buildingUsage
   data_sources:
-    triannual: /assets/building-usage.csv
+    triannual: /kpidata/building-usage.csv
   default_frequency: triannual
   show_frequency_toggle: false
   default_tab: chart

@@ -5,7 +5,7 @@ permalink: /research-assistance.html
 dashboard:
   container_id: researchAssistance
   data_sources:
-    triannual: /assets/reference.csv
+    triannual: /kpidata/reference.csv
   default_frequency: triannual
   show_frequency_toggle: false
   default_tab: chart

@@ -5,7 +5,7 @@ permalink: /verso.html
 dashboard:
   container_id: versoStats
   data_sources:
-    biannual: /assets/verso.csv
+    biannual: /kpidata/verso.csv
   default_frequency: biannual
   show_frequency_toggle: false
   default_tab: chart

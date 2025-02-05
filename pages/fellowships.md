@@ -5,7 +5,7 @@ permalink: /fellowships.html
 dashboard:
   container_id: fellowshipStats
   data_sources:
-    yearly: /assets/fellowships.csv
+    yearly: /kpidata/fellowships.csv
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart

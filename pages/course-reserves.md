@@ -5,7 +5,7 @@ permalink: /course-reserves.html
 dashboard:
   container_id: courseReserves
   data_sources:
-    yearly: /assets/course-reserves.csv
+    yearly: /kpidata/course-reserves.csv
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart

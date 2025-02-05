@@ -5,7 +5,7 @@ permalink: /digital-collections.html
 dashboard:
   container_id: digitalCollections
   data_sources:
-    yearly: /assets/digital-collections.csv
+    yearly: /kpidata/digital-collections.csv
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart

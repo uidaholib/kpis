@@ -5,8 +5,8 @@ permalink: /web.html
 dashboard:
   container_id: webStats
   data_sources:
-    yearly: /assets/web-all-yearly.csv
-    monthly: /assets/web-all-monthly.csv
+    yearly: /kpidata/web-all-yearly.csv
+    monthly: /kpidata/web-all-monthly.csv
   default_frequency: monthly
   show_frequency_toggle: true
   default_tab: chart

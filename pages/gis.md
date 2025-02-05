@@ -5,8 +5,8 @@ permalink: /gis.html
 dashboard:
   container_id: gisUsage
   data_sources:
-    yearly: /assets/gis-yearly.csv
-    monthly: /assets/gis-monthly.csv
+    yearly: /kpidata/gis-yearly.csv
+    monthly: /kpidata/gis-monthly.csv
   default_frequency: yearly
   show_frequency_toggle: true
   default_tab: chart

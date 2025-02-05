@@ -5,7 +5,7 @@ permalink: /open-publishing.html
 dashboard:
   container_id: oapfStats
   data_sources:
-    biannual: /assets/oapf.csv
+    biannual: /kpidata/oapf.csv
   default_frequency: biannual
   show_frequency_toggle: false
   default_tab: chart
