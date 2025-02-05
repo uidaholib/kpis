@@ -1,20 +1,17 @@
 title,url,icon
-"Course Reserves","/course-reserves.html","bi bi-book"
-"Digital Collections","/digital-collections.html","bi bi-collection"
-"Electronic Resources","/electronic-resources.html","bi bi-journal-richtext"
-"Geographic Information Systems","/gis.html","bi bi-globe"
-"Online Catalog","/catalog.html","bi bi-search"
-"Physical Circulation","/physical-circulation.html","bi bi-box-seam"
-"Resource Sharing","/resource-sharing.html","bi bi-share"
-"VERSO (Research Information Management)","/verso.html","bi bi-diagram-3"
-"Special Collections & Archives","/special-collections.html","bi bi-archive"
-"Web Properties","/web.html","bi bi-globe2"
-"Building Usage","/building-usage.html","bi bi-building"
-"Fellowships","/fellowships.html","bi bi-award"
-"Instruction","/instruction.html","bi bi-mortarboard"
-"Open Publishing","/open-publishing.html","bi bi-journal-text"
-"Research and Reference Assistance","/research-assistance.html","bi bi-question-circle"
-"Collaboration","/collaboration.html","bi bi-people"
-"Student Employment","/student-employment.html","bi bi-person-workspace"
-"Student Savings","/student-savings.html","bi bi-piggy-bank"
-"Workshops and Presentations","/workshops.html","bi bi-easel"
+Building Usage,/building-usage.html,bi bi-building
+Course Reserves,/course-reserves.html,bi bi-book
+Digital Collections,/digital-collections.html,bi bi-collection
+Electronic Resources,/electronic-resources.html,bi bi-journal-richtext
+Fellowships,/fellowships.html,bi bi-award
+Geographic Information Systems,/gis.html,bi bi-globe
+Instruction and Workshops,/instruction.html,bi bi-mortarboard
+Online Catalog,/catalog.html,bi bi-search
+Open Publishing,/open-publishing.html,bi bi-journal-text
+Physical Circulation,/physical-circulation.html,bi bi-box-seam
+Research and Reference Assistance,/research-assistance.html,bi bi-question-circle
+Resource Sharing,/resource-sharing.html,bi bi-share
+Special Collections & Archives,/special-collections.html,bi bi-archive
+Student Employment,/student-employment.html,bi bi-person-workspace
+VERSO (Research Information Management),/verso.html,bi bi-diagram-3
+Web Properties,/web.html,bi bi-globe2

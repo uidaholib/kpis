@@ -7,7 +7,7 @@ class InstructionCharts {
   
     async init() {
       try {
-        const response = await fetch('/assets/instruction.csv');
+        const response = await fetch('/kpidata/instruction.csv');
         const csvText = await response.text();
         await this.processData(csvText);
         this.render();
