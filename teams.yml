@@ -1,0 +1,325 @@
+- id: access-technical-services
+  name: "Access & Technical Services Team"
+  type: team
+  description: "The ATS Team coordinates work between the access and technical services units of the library to ensure resources are available to patrons in a timely fashion and that the library's catalog accurately reflects what is on the shelves."
+  objectives:
+    - title: "Ensure optimal workflows between access and technical services activities"
+      success:
+        - "Quick turnaround between material arrival and shelving"
+        - "Limited errors in cataloging and availability of materials on shelves"
+        - "Limited 'in transit' for longer than 30 days"
+      fall-updates:
+        - "Access Services: This Fall Aarika extensively searched for lost and missing books, even going so far as to bring in a video camera that could look in between the shelving units!"
+        - "We are due for another extensive search this March over spring recess"
+        - "Haley has done an exceptional job this Fall training students in mending and newspaper processing. She trained 4 students in mending and 5 in how to process papers"
+        - "This has had a significant impact on the turnaround time for both workloads"
+        - "There are still a few outliers on the 'in transit' status but I have been able to notably reign it in and mostly determine where and why we were having so many long-term issues"
+
+- id: collections
+  name: "Collections Team"
+  type: team
+  description: "The Collections Team is responsible for leading the development of the Library's general collections, which includes working in conjunction with subject liaisons and ensuring existing collections budgets are being spent efficiently. They ensure the campus community is able to provide feedback on the Library's collections and investigate new opportunities for resource acquisitions."
+  objectives:
+    - title: "Review the library's existing general collection resources and analyze usage"
+      success:
+        - "Recommendations given based on analyzing a selection of our existing collection"
+        - "Recommendations given on new subscriptions throughout the year"
+        - "Reports shared with selectors and recommendations given on those reports"
+      fall-updates:
+        - "On a monthly basis, usage statistics were reviewed of every collection due for renewal in 1-2 months"
+        - "Recommendations were made to the Dean for renewal or cancellation per that discussion"
+        - "We have made progress developing circulation reports for our approval plan and firm order titles, with a goal of producing reports to enable liaisons to make adjustments to their spending or to the approval plan"
+    - title: "Ensure two-way communication with campus community about collections"
+      success:
+        - "Cancellation or changes to underperforming subscriptions"
+        - "Collections promoted through Marketing and Communications Team channels"
+        - "Feedback collected on underperforming subscriptions"
+      fall-updates:
+        - "During Fall 2024, we maintained contributions to the Library's newsletter, Letters from the Library, that promoted collections that we sought to raise awareness of"
+        - "We also used the liaison program to reach and gather information regarding potential cuts when appropriate"
+    - title: "Make recommendations on collection renewals, new subscriptions, approval plan purchasing, and firm order areas of emphasis"
+      success:
+        - "Meeting renewal deadlines"
+        - "Receiving feedback from selectors regarding trends in approval/firm order circulation"
+      fall-updates:
+        - "We have met all of our renewal deadlines in the Fall 2024 with recommendations"
+        - "We are currently creating/designing reports to send out to selectors regarding trends in book circulation"
+        - "We have not yet addressed CPU standards for non-journal content"
+
+- id: digital-collections
+  name: "Digital Collections Team"
+  type: team
+  description: "The Digital Collections Team works to determine policy and workflows for the production and publishing of digital collections to produce a consistent, engaging user experience for patrons across the Library's web platforms and discovery services. The team encourages ownership of and communication regarding digital collections and staff and faculty investment in their excellence across the library."
+  objectives:
+    - title: "Guidelines and procedures are created for the digital archive drive and Special Collection & Archive's born-digital collection development processes"
+      success:
+        - "80% of our digital archive drives will be reviewed and improved with documentation and organization by the end of the 2025 Spring Semester"
+        - "Procedures for born-digital collection development processes are communicated and supported by the team"
+      fall-updates:
+        - "With a new digital archivist onboarding and developing workflows, this has not been a focus for fall 2024"
+        - "Once high priority Archive-It needs have been fulfilled, the team will coordinate a presentation with Rebecca Hastings to ensure the group understands how the software functions and other digital preservation opportunities we can explore"
+    - title: "Review Digital Collections for accessibility of media files and improve with additional connective, interpretive material"
+      success:
+        - "100% of our digital collections are Web Content Accessibility Guidelines (WCAG) 2.1 Level AA accessible, meeting the new DOJ ADA requirements for title 2"
+      fall-updates:
+        - "All of the four monthly Digital Collection Team meeting and the six bi-weekly check-in meetings have centered on gauging the current accessibility of our digital collections in anticipation of the DOJ ADA ruling"
+        - "Work has included overviewing the ruling and it's definition of terms, conducting a survey of a sample of digital collections, testing accuracy of Python tools for generating alt text descriptions"
+        - "Some elements of digital collections, like maps and data visualizations, remain challenging for accessibility"
+        - "This process also involved creating transcripts for 230 audio files that previously lacked transcriptions over the summer of 2024"
+    - title: "Improve user engagement with our digital collections through use of web statistics"
+      success:
+        - "Using analysis of user behavior, revisions are made to our digital collections infrastructure that improve engagement and/or acquisition of users for our digital collections"
+      fall-updates:
+        - "While this period did undertake an extensive redesign for the digital collections browse page and updates across all digital collections, these were driven by a need to update template elements and the development of a new tool which allows the patron to search across collections"
+        - "That said, one of the goals for this Spring period can be using analytics to track how users are engaging with the browse and search pages to inform a possible redesign"
+        - "Analytics Dashboard Report templates were developed for easier reading and recording of metrics"
+
+- id: discovery
+  name: "Discovery Team"
+  type: team
+  description: "The Discovery Team is responsible for optimizing discovery of the library's resources. Team members participate in systematic testing of specific features/options, keeping in mind diverse patron needs."
+  objectives:
+    - title: "Maintain or enhance Primo as an accessible and inclusive discovery tool, by identifying features/options for implementation"
+      success:
+        - "Implementation of new Primo features useful to patrons"
+        - "Decisions made on configuration based on patron usage"
+      fall-updates:
+        - "This semester, the team tested four new Primo VE features and decided collectively not to implement any of them at this time"
+    - title: "Ensure cohesion among the library's various discovery tools"
+      success:
+        - "Similar or well-defined search mechanisms, design, and branding among discovery tools"
+      fall-updates:
+        - "The team developed a plan for reviewing the discovery tools, focusing on documenting observations related to search scope and accuracy, design and branding consistency, user experience issues or barriers, and recommendations for improvements"
+        - "The team is scheduled to meet in February 2025 to discuss findings from these observations, aiming to address the KPI for Objective #2: ensuring cohesion among the library's various discovery tools"
+
+- id: first-year-experience
+  name: "First Year Experience Team"
+  type: team
+  description: "The First Year Experience Team is part of a university-wide commitment to connect and support students as they transition to collegiate studies and research. Through instruction, outreach, and engagement, this program aims to improve student retention, foster student success, and empower students to be information literate in the classroom and beyond."
+  objectives:
+    - title: "Provide orientation and instruction to Engl101 students"
+      success:
+        - "The majority of groups participating in the ENGL101 activities and responding to the survey indicate that they are aware of library resources and services and will likely return to use them"
+        - "They are also able to list resources and services that they think will be helpful"
+      fall-updates:
+        - "20 Engl101 tour times were offered, attended by 45 sections, around 852 students"
+        - "752 students completed the survey, 86% of all ENGL101 students from Fall 2024"
+        - "99.66% of respondents indicated that they would return to the library to utilize a resource"
+        - "As this was a new activity, we expected some challenges. Overall, it went well, with students engaging with the chat service and locating books"
+        - "We received feedback from Tyler Easterbook and Engl101 instructors. We are making some changes based on assessment for the spring semester"
+    - title: "Provide integrated information literacy instruction in Engl102"
+      success:
+        - "Continued partnership with the First-Year Writing Program and Director"
+        - "Data collected indicates that the majority of students who attended ENGL 102 library sessions and submitted the assignment retained the foundational information literacy skills taught during Library week"
+      fall-updates:
+        - "After collaborating with Tyler Easterbrook on changes in our library instruction to match the new curriculum, we feel the move to link our assignment to the now-required annotated bibliography was quite helpful"
+        - "Informal assessment indicates that it improved the relevance of our instruction and assignment"
+        - "Some instructors indicated that they needed to adjust the timing of the library sessions in spring semester, as they had based their fall scheduling requests on the previous curriculum"
+        - "In fall 2024, 76% of Engl102 students submitted a library assignment, and 95% of those completed 75% of the answers correctly"
+
+- id: instruction
+  name: "Instruction Team"
+  type: team
+  description: "The Instruction team supports students' success by ensuring and improving the coherence, quality and impact of instructional practices through the formation of communities of practice, the assessment of instructional practices, and the enhancement of the discoverability and usability of the library's online educational resources."
+  objectives:
+    - title: "Host a series of conversations around Instruction techniques and practices among all faculty"
+      success:
+        - "Planning, execution, and delivery of series in Fall 2024"
+      fall-updates:
+        - "The Instruction Team held three faculty conversations"
+        - "October 24: Topic: Scaffolding information literacy learning objectives across the curriculum. Speaker: Tyler Easterbook, Director of First Year Composition"
+        - "November 8: Topic: Teaching methods, in-person and online, for one-shot presentations. Speaker: Jen Elbek, CETL"
+        - "December 5: Topic: AI in information literacy instruction. Speakers: Bert Baumgaertner and Casey Johnson"
+        - "We had attendance of the majority of faculty at each and good engagement"
+    - title: "Scaffold learning objectives and instructional content across lower and upper division instruction"
+      success:
+        - "Finalized and distributed curriculum map in use for library faculty by the Spring Semester"
+      fall-updates:
+        - "At the faculty discussion on October 24, faculty reacted to a draft curriculum map that Norm developed from earlier content"
+        - "Small groups of faculty provided written feedback in group documents"
+        - "The team plans to use this content and develop a public-facing document or infographic that explains our learning objectives across the curriculum"
+    - title: "Aggregate all online instructional content into one accessible portal"
+      success:
+        - "Publish new landing page, visual cues, and resources/tutorials by the Spring Semester"
+      fall-updates:
+        - "On Monday, September 9 the team discussed the work completed during the summer by Hanwen and Norm"
+        - "We made comments and determined that the next step should be to take the proposal to the Web Team"
+
+- id: liaisons
+  name: "Liaisons Team"
+  type: team
+  description: "The Liaison team enriches formal and informal learning opportunities and advances the research, scholarly, and creative activity of faculty and students by broadly communicating library offerings, services, and capacities, building individual and institutional relationships with faculty in the various colleges, and providing discipline specific instruction and assistance for students and faculty."
+  objectives:
+    - title: "Library liaisons will engage in significant interactions and collaborations with faculty and students from across the University"
+      success:
+        - "Liaisons and faculty will, by year's end, have had at least one significant interaction with students and/or faculty from every department on campus"
+      fall-updates:
+        - "Currently we have not come close to meeting this goal. We have not interacted with 15 departments across the colleges of Art and Architecture, Agricultural and Life Sciences, Business and Economics, Education, Engineering, Letters Arts and Social Sciences, Natural Resources, and Science"
+    - title: "Individual Library liaisons will share information about their liaison areas and practices with the rest of the team"
+      success:
+        - "Each liaison will present at least once during the year to the rest of the team"
+      fall-updates:
+        - "So far, four Liaisons have presented to the group on their respective areas and colleges covering CNR, CBE, CLASS (Social Sciences), and CDIL"
+        - "Presentations have led to fruitful discussions and suggestions for improved service"
+    - title: "The Liaison Team will serve as a feedback mechanism for other library teams and for those working on library initiatives"
+      success:
+        - "The team will provide feedback for several library programs/teams/initiatives throughout the year"
+      fall-updates:
+        - "We have not received any requests for feedback yet"
+        - "We also have not really advertised our services in this regard"
+        - "For the spring, we will make sure folks know this is an option"
+
+- id: library-website
+  name: "Library Website Team"
+  type: team 
+  description: "The Library Website Team works to create, maintain, and improve the Library's main website and related digital platforms. It supports developing expertise, assessment, and vision across the Library to ensure the Library's web properties are focused on user needs and accessible to all."
+  objectives:
+    - title: "Improve discoverability of library content"
+      success:
+        - "The website is significantly revised and analytics demonstrates improved user navigation and discoverability of content"
+      fall-updates:
+        - "The team did a full review of all content linked to from the navigation"
+        - "Findings suggested several areas for simple improvements at simplifying page structure which were immediately implemented"
+        - "For the longer-term goal, the team has been gathering sources of data about the existing site and best practices and examples"
+        - "Significant work went into developing Analytics dashboards to make data about the web properties more easily accessible"
+        - "Team members led a library wide workshop to introduce people to the Analytics data and how it can be used"
+    - title: "Redesign website to match university web branding revisions" 
+      success:
+        - "A re-designed website aligned with university revisions"
+      fall-updates:
+        - "The university redesign is still in process, so library redesign is still on hold"
+        - "The library website was updated to use Bootstrap 5 and other updated assets which should help streamline future redesign process"
+        - "The team has been doing research into best practices and examples to draw from"
+    - title: "Provide up to date communication and information on the website"
+      success:
+        - "The library website is up to date in all areas and useful to users looking for current information about library events and resources"
+      fall-updates:
+        - "The team reviewed all content listed in our navigation to ensure all content is up to date"
+        - "Numerous out of date pages were revised, reorganized, or removed"
+        - "New tutorial sections were added to Find Articles and Books to help support user needs"
+        - "Refresh of Spec section to simplify and remove unmaintained content"
+        - "Remove old 'Towers' and replace with 'Letters from the Library'"
+        - "Updated topbar 'Hours' to directly pull information from LibCal Hours"
+        - "Refresh content in Open, OAPF, and Studio"
+
+- id: marketing-communications
+  name: "Marketing & Communications Team"
+  type: team
+  description: "The Marketing & Communications Team ensures consistent, coordinated, and professional messaging from the Library to the wider university and general public about Library collections, events, and services with the goal of increasing awareness and use of Library offerings."
+  objectives:
+    - title: "Work with appropriate Teams and Units to create and regularly distribute campuswide e-newsletters"
+      success:
+        - "Solicit, compile, and distribute content in the form of e-newsletters"
+        - "Increased engagement with newsletter and promoted content"
+      fall-updates:
+        - "Newsletters distributed regularly"
+        - "Engagement metrics being tracked through analytics"
+    - title: "Maintain active social media accounts"
+      success:
+        - "Regular distribution of content through active channels"
+        - "Growing followers and engagement rates"
+      fall-updates:
+        - "Social media accounts maintained consistently"
+        - "Tracking engagement and follower metrics"
+    - title: "Regularly compile and distribute Brief Notes internal newsletter"
+      success:
+        - "Regular distribution resulting in increased awareness of Library events, initiatives, personnel matters"
+        - "Positive feedback from annual survey"
+      fall-updates:
+        - "Brief Notes distributed regularly"
+        - "Survey planning underway"
+
+- id: mentorship-scholarship
+  name: "Mentorship & Scholarship Team"
+  type: team
+  description: "The Mentorship/Scholarship Team enhances faculty development through the creation of formal and informal mentorship opportunities and fostering a supportive academic community via co-working and professional development opportunities."
+  objectives:
+    - title: "Create cohort communication venues and mentorship possibilities for new librarians"
+      success:
+        - "Documented mentorship and collaboration occurring among new librarians and between new librarians and those further along in their career"
+      fall-updates:
+        - "Organized two virtual gatherings for seven newest faculty members to learn about important aspects of Library culture and processes"
+        - "First meeting was a check-in on first several months and solicited feedback on future topics"
+        - "Second meeting covered preparing for annual reviews, formatting CVs, and general productivity tips"
+        - "Planning one or two more meetings for spring, including one on scholarly publication lifecycle"
+    - title: "Facilitate formal and informal collaboration opportunities for faculty"
+      success:
+        - "Activities and sessions have been offered"
+      fall-updates:
+        - "Organized three 'Friday Faculty Meet-ups' at different locations with 4-8 attendees each time"
+        - "Developed form to track proposals and publications to better celebrate colleagues' successes"
+
+- id: open-strategies
+  name: "Open Strategies Team"
+  type: team
+  description: "The Open Strategies Team supports student success and the transformation of scholarly communication by building understanding, engagement, and capacity for open access, open education, and open scholarship practices both in the Library and throughout the university."
+  objectives:
+    - title: "Make University of Idaho students' education more affordable"
+      success:
+        - "Save students at least $100,000 through open practices"
+      fall-updates:
+        - "Multiple practices implemented to increase affordability"
+        - "Tracking savings metrics"
+    - title: "Leverage Verso to measure and improve OA publication on campus"
+      success:
+        - "OAPF funds expended"
+        - "Statistics tracked via VERSO for OAPF and OA articles"
+      fall-updates:
+        - "OAPF program actively managed"
+        - "Tracking publication metrics through VERSO"
+
+- id: physical-spaces
+  name: "Physical Spaces & Public Programming Team"
+  type: team
+  description: "The Physical Spaces and Public Programming Team seeks to provide safe, usable, and accessible public spaces for U of I affiliates and community members who visit the Library in-person. They make space recommendations to library leadership based on local space assessments and national library trends."
+  objectives:
+    - title: "Ensure accessible and usable spaces that meet diverse patron needs"
+      success:
+        - "Steady or increasing usage of library public spaces"
+        - "Positive user feedback"
+      fall-updates:
+        - "Regular space assessments conducted"
+        - "Usage metrics tracked"
+        - "Implementing improvements based on feedback"
+
+- id: research-impact
+  name: "Research Impact Team"
+  type: team
+  description: "The Research Impact Team enhances the representation and impact of the university's research endeavors and scholarly communication through its management of VERSO, the university's research information management and Institutional Repository system, its promotion of university research, and its efforts to facilitate connections between university researchers."
+  objectives:
+    - title: "Create clear policies and procedures for public and internal users using VERSO"
+      success:
+        - "Published and up-to-date documentation for internal and public users"
+      fall-updates:
+        - "Documentation sites available for procedures and policies"
+        - "Internal procedures documented for most recurring tasks"
+        - "Developed workflow for policy proposals"
+
+- id: student-employee-development
+  name: "Student Employee Development Team"
+  type: team
+  description: "The Student Employee Development Group seeks to provide equitable opportunities for student employees to gain new knowledge and skills via training, on-the-job experiences, and performance evaluations. This group ensures standardized hiring and training practices for student employees in all areas of the library while also making recommendations for student employee pay scales."
+  objectives:
+    - title: "Ensure that student employee pay is justified within each Library unit"
+      success:
+        - "Recruitment and retention of high-quality student workers"
+        - "Staffing needed positions while staying within budget"
+      fall-updates:
+        - "Continued use of Tier system for raises and skill development"
+        - "Planning spring assessment of campus-wide student worker pay scales"
+
+- id: student-engagement
+  name: "Student Engagement Team"
+  type: team
+  description: "The Student Engagement Team provides opportunities for students to engage with and learn more about library staff, resources, campus services, and each other. The team strives to create a sense of community in which all levels of students feel seen, heard, and comfortable engaging with the library."
+  objectives:
+    - title: "Maximize student awareness of and comfort in library spaces, resources, services, and staff"
+      success:
+        - "Student awareness of library resources, services, and staff members"
+        - "Student participation and engagement in events and programs"
+        - "Identification and prioritization of key events"
+      fall-updates:
+        - "16 successful events held (up from 12 last fall) reaching 938 students (206% increase)"
+        - "Whiteboard engagement increased to 81% from 79%"
+        - "Board game circulation increased 134% from last fall"
+        - "Website engagement metrics tracked and maintained"

@@ -1,0 +1,186 @@
+- id: dsos
+  name: "Digital Scholarship and Open Strategies Unit"
+  type: unit
+  description: "The Digital Scholarship and Open Strategies unit enriches learning opportunities and advances research, scholarly and creative activity related to digital scholarship, open education, open publishing, web development, and asynchronous and online learning. Serving as the home for programs such as the Center for Digital Inquiry and Learning, the Open Access Publishing Fund, and the Think Open fellowship program, the unit fosters the infrastructure and expertise necessary to support and sustain the library's efforts in digital projects, services, and project management."
+  objectives:
+    # [Previous objectives remain the same]
+    - title: "Facilitate social and technical infrastructure for open publishing both on campus and worldwide (OAPF, web development, Pressbooks)"
+      success:
+        - "Use of Pressbooks to create OER and other projects increases"
+        - "Metrics for OAPF continue to show impact supporting open publishing"
+        - "CollectionBuilder continues to get engagement beyond campus"
+      fall-updates:
+        - "The Pressbooks home was revised to improve presentation and catalog consistency"
+        - "Leesa has worked on documenting best practices for Pressbook service and growing our capacity to support projects"
+        - "2 new Pressbooks projects were published and 2 additional projects created"
+        - "5 Pressbooks were added to the Library's main catalog and VERSO, and 4 were promoted"
+        - "OAPF continued as normal, closing in period #1 early with high demand"
+        - "CollectionBuilder opened applications for the second round of the LIS Student Program and received over 70 applications from 25 different schools"
+- id: rel
+  name: "Research & Experiential Learning Unit"
+  type: unit
+  description: "The Research & Experiential Learning (REL) offers dedicated spaces and services to U of I students, staff, and faculty to engage in curricular, research, or personal learning experiences. The REL Unit delivers services through four programs: the MILL, the Studio, the Data Hub, and VERSO. Unit personnel emphasizes excellence in service delivery, creative and innovative learning opportunities, and efficient management of its resources in support of the Library's strategic priorities."
+  objectives:
+    - title: "Maximize user engagement with program equipment and services"
+      success:
+        - "Usage metrics that meet or exceed previous performance"
+        - "Qualitative data that indicates patron satisfaction with resources"
+      fall-updates:
+        - "MILL door counts increased from 12650 in Fall 2024 vs. 9986 in Fall 2023"
+        - "Data Hub space usage peaked at average of 12 people per day, up from 9.9 in Fall 2023"
+        - "Studio bookings were 141, up from 104 in Fall 23 but down from 228 in Spring 24"
+    - title: "Create effective learning and research experiences"
+      success:
+        - "Consistent, well-attended workshops and events"
+        - "Course/class engagement with REL programs"
+        - "Research lab/group engagement with REL programs"
+      fall-updates:
+        - "Data Hub Tech Talks declined this semester compared to Spring 2024"
+        - "MILL Workshops showed decline from Fall 2023 but increase vs Spring 2024"
+        - "Course engagement continued with VTD 254, ENVS 497, GEOG 385, GERM 301, FOR 274, SPAN 306"
+    - title: "Manage research information and data collections efficiently and effectively"
+      success:
+        - "Continued high use of ArcGIS platforms"
+        - "Consistent updating of VERSO"
+        - "Engagement by at least one unit from each UI College with VERSO"
+        - "Use of data management support meeting or exceeding previous performance"
+      fall-updates:
+        - "GIS platforms averaged 492 unique users per month vs. 422 in Fall 2023"
+        - "VERSO was continually updated with Research Impacts Team managing smart harvesting"
+        - "Widespread updating of profile information across colleges"
+    - title: "Revamp the License to MILL program (2024-2025 project)"
+      success:
+        - "A small number of students starting the program each semester"
+        - "100% completion by a subset of those students"
+        - "Promotion of achievement through MILL's communication channels"
+      fall-updates:
+        - "MILL Manager has started to outline new achievements for the program"
+  metrics:
+    all_programs:
+      - "Total appointments: MILL - 154 bookings; Studio - 141 bookings"
+      - "Web visits (Aug-Dec): VERSO - 44,852; GIS Pages - 515,595; Studio - 981; MILL - 316"
+      - "Consultations: Studio - 7; MILL - 762; Data Hub - 79"
+    studio_specific:
+      - "New bookings: 81%"
+      - "Weekly usage: 13.5 hours"
+      - "Equipment circulations: 134"
+    datahub_specific:
+      - "ArcGIS usage: 2460 unique users, 367 new users, 2500 items created"
+      - "Space usage: Average 12 people per day including events"
+    mill_specific:
+      - "Partnerships outside library: 6"
+      - "Mobile MILL visitors: 711"
+      - "Door count: 12,650"
+- id: aeu
+  name: "Access & Engagement Unit"
+  type: unit
+  description: "The Access & Engagement Unit encompasses Access Services and Reference Services. Within each of these areas, supporting our patrons and forming connections with them is crucial. In Access Services in the Main Library and Gary Strong Curriculum Center (GSCC), we seek to connect in-person and virtual U of I affiliate and community members to library resources, course reserves, spaces, and technology. In Reference Services, we seek to assist, advise, and instruct in-person and virtual U of I affiliates and community members in finding, accessing, and evaluating information related to their information and research needs."
+  objectives:
+    - title: "Facilitate physical and electronic Course Reserves"
+      success:
+        - "Continued or increased usage of Course Reserves by faculty and instructors"
+        - "Positive interactions with faculty and instructors"
+        - "Continued cost-savings for students"
+      fall-updates:
+        - "89 instructors across 103 courses and 40 subjects utilized Course Reserves"
+        - "Physical course reserves circulated 107 times"
+        - "Controlled Digital Lending items viewed 4,646 times"
+        - "Estimated student savings over $474,000 on required and recommended materials"
+        - "Average cost-savings by discipline equaling $11,871.56"
+    - title: "Review and maintain physical collection stacks"
+      success:
+        - "Reduction in un-loaned items labelled as missing"
+        - "Orderly and accurate physical collection stacks"
+      fall-updates:
+        - "Reviewed A-G call number ranges"
+        - "Identified 500+ missing/lost items, 20 mis-shelved items"
+        - "Pulled 296 items for mending and 602 duplicate items for review"
+        - "GSCC added 696 items and removed/deleted 819 items"
+    - title: "Provide relevant and timely point-of-need Reference and Circulation services"
+      success:
+        - "Positive interactions with patrons"
+        - "Monitoring usage and making data-based recommendations"
+        - "Completing IDOC resident students' requests within one week"
+        - "Timely filling of hold requests"
+      fall-updates:
+        - "Reference received 1,691 questions (2.2% increase from Fall 2023)"
+        - "GSCC received 380 questions (55% increase from Fall 2023)"
+        - "68% of reference questions classified as READ level 2 or higher"
+        - "Main Library Access Services reported 2,000+ patron interactions"
+    - title: "Provide timely access to the Main Library and Gary Strong Curriculum Center"
+      success:
+        - "Continued or increased usage of the Main Library and GSCC during open hours"
+      fall-updates:
+        - "122,527 Main Library visitors (7% decrease from Fall 2023)"
+        - "GSCC had 1,283 visitors, 700+ in September alone"
+        - "First-floor open spaces averaged 4,000+ users per month"
+    - title: "Investigate new reference model options"
+      success:
+        - "Develop a list of reference model options with pros/cons and recommendation for AY 2025-2026"
+      fall-updates:
+        - "Generated list of three reference models with pros and cons"
+        - "Shared options with Dean of Libraries and Associate Dean"
+- id: sca
+  name: "Special Collections & Archives Unit"
+  type: unit
+  description: "The Special Collections & Archives (SCA) Unit builds and maintains unique and distinctive collections, provides research consultations and instruction, manages archival processing and digitization projects, and facilitates regular outreach and exhibitions. The unit's activities encompass the following areas: collection development, collection management, collection storage, reference services, research instruction, digitization, collection exhibits, donor and community relations, and fundraising."
+  objectives:
+    - title: "Develop and build unique and distinctive collections"
+      success:
+        - "Growth in use of collections by researchers and students"
+        - "Continued donor engagement and collection development activities"
+        - "Successful completion of collection development projects"
+        - "Integration of SCA materials into classes"
+      fall-updates:
+        - "Worked on donor development projects including Latah County Historical Society"
+        - "Developed new collections and relationships with student groups and departments"
+        - "Completed negotiation and transfer of several important collections"
+        - "Increased outreach to faculty and students about collections"
+    
+    - title: "Process and preserve collections according to archival standards"
+      success:
+        - "Completion of processing projects"
+        - "Improvement in collection storage and access"
+        - "Implementation of preservation and processing standards"
+        - "Creation of finding aids and collection guides"
+      fall-updates:
+        - "Completed processing of several major collections"
+        - "Made significant progress on backlog reduction"
+        - "Improved storage conditions in major collection areas"
+        - "Updated finding aids and collection guides"
+    
+    - title: "Provide research services and instruction"
+      success:
+        - "Increased engagement with faculty and students"
+        - "Growth in research consultations and class sessions"
+        - "Positive feedback from researchers and instructors"
+        - "Development of new instructional materials"
+      fall-updates:
+        - "Conducted research consultations with faculty, students, and community members"
+        - "Led instruction sessions for multiple departments"
+        - "Created new research guides and instructional resources"
+        - "Expanded outreach to new departments and programs"
+    
+    - title: "Create engaging exhibits and outreach programs"
+      success:
+        - "Regular rotation of exhibits"
+        - "Increased visitor engagement"
+        - "Positive feedback from exhibit viewers"
+        - "Development of new outreach initiatives"
+      fall-updates:
+        - "Mounted several successful exhibits"
+        - "Increased social media presence and engagement"
+        - "Developed new partnerships for outreach activities"
+        - "Created innovative virtual and physical displays"
+    
+    - title: "Expand digital access to collections"
+      success:
+        - "Growth in digital collection size"
+        - "Increased online access to materials"
+        - "Implementation of digitization standards"
+        - "Completion of digital projects"
+      fall-updates:
+        - "Digitized priority collections and materials"
+        - "Improved metadata and access points"
+        - "Enhanced digital preservation workflows"
+        - "Increased online discoverability of collections"
