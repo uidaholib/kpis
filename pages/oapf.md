@@ -1,35 +1,23 @@
 ---
-title: Open Access Publishing Fund (OAPF)
+title: Open Publishing
 layout: dashboard
-permalink: /oapf.html
+permalink: /open-publishing.html
 dashboard:
   container_id: oapfStats
   data_sources:
-    yearly: /assets/oapf.csv
-  default_frequency: yearly
+    biannual: /assets/oapf.csv
+  default_frequency: biannual
   show_frequency_toggle: false
   default_tab: chart
   show_table: true
-  table_columns:
-    - Total Applications
-    - Total Funded
-    - Applications Approved
-    - Amount Funded
   charts:
     - type: line
-      title: Total Applications Growth
+      title: Funded Articles and Departments Impacted
       datasets:
         - row_index: 0
+        - row_index: 2
     - type: line
-      title: Total Funded Growth
+      title: Total Amount Expended
       datasets:
         - row_index: 1
-    - type: bar
-      title: Applications Approved by Year
-      datasets:
-        - row_index: 2
-    - type: bar
-      title: Amount Funded by Year
-      datasets:
-        - row_index: 3
 ---

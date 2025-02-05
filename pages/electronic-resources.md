@@ -1,26 +1,24 @@
 ---
-title: Building Usage
+title: Electronic Resources
 layout: dashboard
-permalink: /building-usage.html
+permalink: /electronic-resources.html
 dashboard:
-  container_id: buildingUsage
+  container_id: electronicStats
   data_sources:
-    triannual: /assets/building-usage.csv
+    triannual: /assets/electronic-resources.csv
   default_frequency: triannual
   show_frequency_toggle: false
   default_tab: chart
   show_table: true
   charts:
     - type: line
-      title: Gate Counts
+      title: Database and Journal Usage
       datasets:
         - row_index: 0
-    - type: line
-      title: Room/MILL Reservations
-      datasets:
         - row_index: 1
+    - type: line
+      title: E-book and Streaming Video Usage
+      datasets:
         - row_index: 2
         - row_index: 3
-        - row_index: 4
-        - row_index: 5
 ---

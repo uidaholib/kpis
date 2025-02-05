@@ -10,26 +10,25 @@ dashboard:
   show_frequency_toggle: false
   default_tab: chart
   show_table: true
-  table_columns:
-    - Total Collections
-    - Total Items
-    - Collections Added
-    - Items Added
   charts:
-    - type: line
-      title: Total Collections Growth
+    - type: bar
+      title: Finding Aids
       datasets:
         - row_index: 0
-    - type: line
-      title: Total Items Growth
-      datasets:
         - row_index: 1
-    - type: bar
-      title: Collections Added by Year
-      datasets:
         - row_index: 2
     - type: bar
-      title: Items Added by Year
+      title: Archives West Data
       datasets:
         - row_index: 3
+    - type: bar
+      title: Patron Interactions
+      datasets:
+        - row_index: 4
+        - row_index: 5
+        - row_index: 6
+    - type: bar
+      title: Linear Feet
+      datasets:
+        - row_index: 7
 ---

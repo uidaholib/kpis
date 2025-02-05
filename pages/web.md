@@ -7,7 +7,7 @@ dashboard:
   data_sources:
     yearly: /assets/web-all-yearly.csv
     monthly: /assets/web-all-monthly.csv
-  default_frequency: yearly
+  default_frequency: monthly
   show_frequency_toggle: true
   default_tab: chart
   show_table: true
