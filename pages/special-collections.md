@@ -1,23 +1,23 @@
 ---
-title: Course Reserves
+title: Special Collections
 layout: dashboard
-permalink: /course-reserves.html
+permalink: /special-collections.html
 dashboard:
-  container_id: courseReserves
+  container_id: specialCollections
   data_sources:
-    yearly: /assets/course-reserves.csv
+    yearly: /assets/special-collections.csv
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart
   show_table: true
   table_columns:
-    - Total Courses
+    - Total Collections
     - Total Items
-    - Courses Added
+    - Collections Added
     - Items Added
   charts:
     - type: line
-      title: Total Courses Growth
+      title: Total Collections Growth
       datasets:
         - row_index: 0
     - type: line
@@ -25,7 +25,7 @@ dashboard:
       datasets:
         - row_index: 1
     - type: bar
-      title: Courses Added by Year
+      title: Collections Added by Year
       datasets:
         - row_index: 2
     - type: bar

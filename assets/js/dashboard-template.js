@@ -10,12 +10,15 @@ window.KPIDashboard = class KPIDashboard {
             defaultTab: 'chart',
             showTable: true,
             frequencies: ['yearly', 'monthly', 'triannual', 'biannual'],
+            rowMappings: [], // New property for explicit row mappings
             ...config
         };
         this.charts = [];
         this.container = document.getElementById(this.config.containerId);
         this.data = null;
         this.currentFrequency = this.config.defaultFrequency;
+        this.tableColumns = config.tableColumns || [];
+        this.rowLabels = []; // Store row labels separately
         
         // Initialize the basic structure
         this.initializeStructure();
@@ -133,46 +136,38 @@ window.KPIDashboard = class KPIDashboard {
     }
 
     async loadData(frequency) {
+        const dataSource = this.config.dataSources[frequency];
+        if (!dataSource) {
+            this.showError(`Data source for frequency "${frequency}" not found.`);
+            return;
+        }
+    
         try {
-            const response = await fetch(this.config.dataSources[frequency] + '.csv');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const text = await response.text();
-            
-            const parseResult = Papa.parse(text, {
-                header: true,
-                skipEmptyLines: true,
-                transformHeader: header => header.trim() || 'metric',
-                transform: (value, column) => {
-                    if (!value) return 0;
-                    // Handle currency values
-                    if (typeof value === 'string' && value.includes('$')) {
-                        return parseFloat(value.replace(/[$,]/g, ''));
-                    }
-                    // Handle percentages
-                    if (typeof value === 'string' && value.includes('%')) {
-                        return parseFloat(value.replace('%', ''));
-                    }
-                    // Handle time duration
-                    if (typeof value === 'string' && value.includes(':')) {
-                        const [hours, minutes, seconds] = value.split(':').map(Number);
-                        return hours * 3600 + minutes * 60 + seconds;
-                    }
-                    // Handle numbers with commas
-                    if (typeof value === 'string' && value.includes(',')) {
-                        return parseFloat(value.replace(/,/g, ''));
-                    }
-                    // Try to convert to number if possible
-                    const num = parseFloat(value);
-                    return isNaN(num) ? value : num;
-                }
-            });
+            // Construct full URL using baseUrl
+            const baseUrl = this.config.baseUrl || '';
+            const url = dataSource.startsWith('http') ? dataSource : `${baseUrl}${dataSource}`;
 
-            this.data = parseResult.data;
+            const response = await fetch(url);
+            const csvText = await response.text();
+            
+            // Parse CSV and find the first column name, whatever it might be
+            const parsedData = Papa.parse(csvText, {
+                header: true,
+                skipEmptyLines: true
+            });
+            
+            // Store the first column name for later use
+            this.labelColumn = parsedData.meta.fields[0];
+            this.data = parsedData.data;
+            
+            // Automatically set table columns if not provided
+            if (this.tableColumns.length === 0 && parsedData.meta.fields) {
+                this.tableColumns = parsedData.meta.fields;
+            }
+    
+            this.renderContent();
         } catch (error) {
-            console.error('Error loading data:', error);
-            throw error;
+            this.showError(`Failed to load data: ${error.message}`);
         }
     }
 
@@ -202,12 +197,23 @@ window.KPIDashboard = class KPIDashboard {
 
     getDataColumns() {
         if (!this.data || !this.data[0]) return [];
-        const columns = Object.keys(this.data[0]).filter(key => key !== 'metric');
+        
+        // Filter out the label column and any non-numeric/year columns
+        const columns = Object.keys(this.data[0]).filter(key => {
+            if (key === 'Unnamed: 0') return false;
+            // Include if it's a year (4 digits)
+            if (key.match(/^\d{4}$/)) return true;
+            // Include if any row has a numeric value for this column
+            return this.data.some(row => {
+                const value = row[key];
+                return value !== null && value !== undefined && !isNaN(parseFloat(value));
+            });
+        });
         
         // Sort columns appropriately based on frequency
         switch (this.currentFrequency) {
             case 'yearly':
-                return columns.sort();
+                return columns.sort((a, b) => a.localeCompare(b));
             case 'monthly':
                 return columns.sort((a, b) => new Date(a) - new Date(b));
             case 'triannual':
@@ -239,29 +245,77 @@ window.KPIDashboard = class KPIDashboard {
         }
     }
 
-    processChartData(data, config) {
-        const columns = this.getDataColumns();
-        
-        return {
-            labels: columns.map(col => this.formatColumnLabel(col)),
-            datasets: config.datasets.map(dataset => {
-                const row = this.data[dataset.row_index];
-                return {
-                    label: dataset.label,
-                    data: columns.map(col => {
-                        const value = row[col];
-                        return typeof value === 'number' ? value : 0;
-                    }),
-                    borderColor: dataset.color,
-                    backgroundColor: dataset.color,
-                    fill: false,
-                    tension: 0.1
-                };
-            })
-        };
-    }
+    
+processChartData(data, config, chartIndex) {
+    const columns = this.getDataColumns();
+    const defaultColors = ['#4363d8', 'green', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#e6194b', '#3cb44b', '#ffe119', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
 
-    createChart(config) {
+    return {
+        labels: columns.map(col => this.formatColumnLabel(col)),
+        datasets: config.datasets.map((dataset, index) => {
+            const row = this.data[dataset.row_index];
+            const colorIndex = (chartIndex + index) % defaultColors.length;
+            
+            // Get the label using the stored first column name
+            const label = row[this.labelColumn] || `Dataset ${dataset.row_index + 1}`;
+            console.log(`Creating dataset for row ${dataset.row_index} with label: ${label}`);
+
+            return {
+                label: label,
+                data: columns.map(col => {
+                    let value = row[col];
+                    if (value === null || value === undefined || value === '') {
+                        return 0;
+                    }
+                    if (typeof value === 'string') {
+                        value = value.replace(/[$,]/g, '');
+                    }
+                    return parseFloat(value) || 0;
+                }),
+                borderColor: dataset.color || defaultColors[colorIndex],
+                backgroundColor: dataset.color || defaultColors[colorIndex],
+                fill: false,
+                tension: 0.1
+            };
+        })
+    };
+}
+
+getDataColumns() {
+    if (!this.data || !this.data[0]) return [];
+    
+    // Filter out the first column (whatever it's named) and any non-numeric/year columns
+    const columns = Object.keys(this.data[0]).filter(key => {
+        // Exclude the label column (first column)
+        if (key === this.labelColumn) return false;
+        // Include if it's a year (4 digits)
+        if (key.match(/^\d{4}$/)) return true;
+        // Include if any row has a numeric value for this column
+        return this.data.some(row => {
+            const value = row[key];
+            return value !== null && value !== undefined && !isNaN(parseFloat(value));
+        });
+    });
+    
+    // Sort columns appropriately based on frequency
+    switch (this.currentFrequency) {
+        case 'yearly':
+            return columns.sort((a, b) => a.localeCompare(b));
+        case 'monthly':
+            return columns.sort((a, b) => new Date(a) - new Date(b));
+        case 'triannual':
+        case 'biannual':
+            return columns.sort((a, b) => {
+                const termA = this.parseTerm(a);
+                const termB = this.parseTerm(b);
+                return termA.sortValue - termB.sortValue;
+            });
+        default:
+            return columns;
+    }
+}
+
+    createChart(config, chartIndex) {
         const canvas = document.createElement('canvas');
         const chartContainer = document.createElement('div');
         chartContainer.className = 'mb-4';
@@ -270,7 +324,7 @@ window.KPIDashboard = class KPIDashboard {
 
         const chart = new Chart(canvas, {
             type: config.type,
-            data: this.processChartData(this.data, config),
+            data: this.processChartData(this.data, config, chartIndex),
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -302,59 +356,75 @@ window.KPIDashboard = class KPIDashboard {
         return chartContainer;
     }
 
+    renderCharts() {
+        const chartContainer = this.container.querySelector('#chart') || 
+                             this.container.querySelector('.dashboard-content');
+        if (!chartContainer) return;
+        
+        chartContainer.innerHTML = '';
+        
+        this.config.chartTypes.forEach((chartConfig, index) => {
+            const chart = this.createChart(chartConfig, index);
+            chartContainer.appendChild(chart);
+        });
+    }
+
+    /**
+     * Creates a responsive table element with a header and body populated from instance data.
+     *
+     * @returns {HTMLDivElement} A div element containing the responsive table.
+     */
     createTable() {
         const tableContainer = document.createElement('div');
         tableContainer.className = 'table-responsive';
-        
+
         const table = document.createElement('table');
-        table.className = 'table table-striped table-hover';
-        
+        table.className = 'table table-striped';
+
         const thead = document.createElement('thead');
-        thead.className = 'table-dark';
+        const tbody = document.createElement('tbody');
+
+        // Create table header
         const headerRow = document.createElement('tr');
-        
         const columns = this.getDataColumns();
-        
-        // Add Metric header
-        const metricHeader = document.createElement('th');
-        metricHeader.textContent = 'Metric';
-        headerRow.appendChild(metricHeader);
-        
-        // Add column headers
-        columns.forEach(col => {
+        columns.forEach(column => {
             const th = document.createElement('th');
-            th.textContent = this.formatColumnLabel(col);
+            th.textContent = this.formatColumnLabel(column);
             headerRow.appendChild(th);
         });
-        
         thead.appendChild(headerRow);
-        table.appendChild(thead);
-        
-        const tbody = document.createElement('tbody');
+
+        // Create table body
         this.data.forEach(row => {
-            if (row.metric && (!this.config.tableColumns || this.config.tableColumns.includes(row.metric))) {
-                const tr = document.createElement('tr');
-                
-                // Add metric name
-                const tdName = document.createElement('td');
-                tdName.textContent = row.metric;
-                tr.appendChild(tdName);
-                
-                // Add values for each column
-                columns.forEach(col => {
-                    const td = document.createElement('td');
-                    td.textContent = this.formatValue(row[col], row.metric);
-                    tr.appendChild(td);
-                });
-                
-                tbody.appendChild(tr);
-            }
+            const bodyRow = document.createElement('tr');
+            columns.forEach(column => {
+                const td = document.createElement('td');
+                let value = row[column];
+                if (typeof value === 'string') {
+                    value = value.replace(/[$,]/g, ''); // Remove dollar signs and commas
+                }
+                td.textContent = value;
+                bodyRow.appendChild(td);
+            });
+            tbody.appendChild(bodyRow);
         });
-        
+
+        table.appendChild(thead);
         table.appendChild(tbody);
         tableContainer.appendChild(table);
-        
+
         return tableContainer;
+    }
+
+    renderTable() {
+        const tableContainer = this.container.querySelector('#table') || 
+                             this.container.querySelector('.dashboard-content');
+        if (!tableContainer) return;
+        
+        tableContainer.innerHTML = '';
+        
+        const table = this.createTable();
+        tableContainer.appendChild(table);
     }
 
     renderContent() {
@@ -396,28 +466,6 @@ window.KPIDashboard = class KPIDashboard {
         if (this.config.showTable) {
             this.renderTable();
         }
-    }
-
-    renderCharts() {
-        const chartContainer = this.container.querySelector('#chart') || 
-                             this.container.querySelector('.dashboard-content');
-        if (!chartContainer) return;
-        
-        chartContainer.innerHTML = '';
-        
-        this.config.chartTypes.forEach(chartConfig => {
-            const chart = this.createChart(chartConfig);
-            chartContainer.appendChild(chart);
-        });
-    }
-
-    renderTable() {
-        const tableContainer = this.container.querySelector('#table');
-        if (!tableContainer) return;
-        
-        const table = this.createTable();
-        tableContainer.innerHTML = '';
-        tableContainer.appendChild(table);
     }
 
     showError(message) {

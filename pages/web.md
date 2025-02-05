@@ -1,54 +1,31 @@
 ---
-title: Web Analytics
+title: Web
 layout: dashboard
-permalink: /web-analytics.html
+permalink: /web.html
 dashboard:
-  container_id: webAnalytics
+  container_id: webStats
   data_sources:
-    yearly: /assets/web-all-yearly
-    monthly: /assets/web-all-monthly
+    yearly: /assets/web-all-yearly.csv
+    monthly: /assets/web-all-monthly.csv
   default_frequency: yearly
   show_frequency_toggle: true
   default_tab: chart
   show_table: true
-  table_columns:
-    - Total users
-    - New users
-    - Views
-    - Views per user
-    - Sessions
-    - Average session duration
-    - Engaged sessions
-    - Engagement rate
   charts:
     - type: line
-      title: User Growth
-      height: 400px
+      title: Total Visits Growth
       datasets:
-        - label: Total Users
-          row_index: 0
-          color: '#0d6efd'
-        - label: New Users
-          row_index: 1
-          color: '#6610f2'
+        - row_index: 0
     - type: line
-      title: Engagement Metrics
-      height: 400px
+      title: Unique Visitors Growth
       datasets:
-        - label: Views
-          row_index: 2
-          color: '#198754'
-        - label: Sessions
-          row_index: 4
-          color: '#0dcaf0'
-    - type: line
-      title: Engagement Rates
-      height: 400px
+        - row_index: 1
+    - type: bar
+      title: Page Views by Year
       datasets:
-        - label: Views per User
-          row_index: 3
-          color: '#fd7e14'
-        - label: Engagement Rate
-          row_index: 7
-          color: '#20c997'
+        - row_index: 2
+    - type: bar
+      title: Bounce Rate by Year
+      datasets:
+        - row_index: 3
 ---

@@ -28,13 +28,15 @@ window.addEventListener('load', async function() {
             defaultFrequency: '{{ page.dashboard.default_frequency }}',
             showFrequencyToggle: {{ page.dashboard.show_frequency_toggle }},
             defaultTab: '{{ page.dashboard.default_tab }}',
-            showTable: {{ page.dashboard.show_table }},
+            showTable: {{ page.dashboard.show_table | jsonify }},
             tableColumns: {{ page.dashboard.table_columns | jsonify }},
-            chartTypes: {{ page.dashboard.charts | jsonify }}
+            chartTypes: {{ page.dashboard.charts | jsonify }},
+            baseUrl: '{{ "" | relative_url }}' 
         });
         
         await dashboard.init();
     } catch (error) {
         console.error('Failed to initialize dashboard:', error);
     }
-});</script>
+});
+</script>

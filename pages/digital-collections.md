@@ -5,7 +5,7 @@ permalink: /digital-collections.html
 dashboard:
   container_id: digitalCollections
   data_sources:
-    yearly: /assets/digital-collections-yearly
+    yearly: /assets/digital-collections.csv
   default_frequency: yearly
   show_frequency_toggle: false
   default_tab: chart
@@ -18,30 +18,20 @@ dashboard:
   charts:
     - type: line
       title: Total Collections Growth
-      height: 400px
       datasets:
-        - label: Total Collections
-          row_index: 0
-          color: '#0d6efd'
+        - row_index: 0
     - type: line
       title: Total Items Growth
-      height: 400px
       datasets:
-        - label: Total Items
-          row_index: 1
-          color: '#198754'
+        - row_index: 1
+          color: green
     - type: bar
       title: Collections Added by Year
-      height: 400px
       datasets:
-        - label: Collections Added
-          row_index: 2
-          color: 'rgba(13, 110, 253, 0.7)'
+        - row_index: 2
     - type: bar
       title: Items Added by Year
-      height: 400px
       datasets:
-        - label: Items Added
-          row_index: 3
-          color: 'rgba(25, 135, 84, 0.7)'
+        - row_index: 3
+          color: green
 ---
