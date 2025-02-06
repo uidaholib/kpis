@@ -15,7 +15,7 @@
               </button>
               <div class="nav flex-column">
                 {% for k in site.data.kpi-sections %}
-                  <a href="{{ k.url | relative_url }}" class="nav-link">
+                  <a href="{{ k.url | relative_url }}" class="nav-link {% if k.url contains page.url and page.url != '/' %} bg-primary text-white{% endif %}">
                       <i class="{{k.icon}}"></i>
                       <span class="menu-text">{{k.title}}</span>
                   </a>
@@ -23,8 +23,10 @@
                 
               </div>
           </div>
-          <div class="content p-4">
+          <div class="content px-4">
+            {% include collection-nav.html %}
             {% include collection-banner.html %}
+            
               {{ content }}
           </div>
       </div>
