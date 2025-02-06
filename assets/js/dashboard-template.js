@@ -13,6 +13,7 @@ window.KPIDashboard = class KPIDashboard {
             rowMappings: [], // New property for explicit row mappings
             ...config
         };
+        console.log('Dashboard config:', config); // Add this line to verify config
         this.charts = [];
         this.container = document.getElementById(this.config.containerId);
         this.data = null;
@@ -246,40 +247,43 @@ window.KPIDashboard = class KPIDashboard {
     }
 
     
-processChartData(data, config, chartIndex) {
-    const columns = this.getDataColumns();
-    const defaultColors = ['#4363d8', 'green', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#e6194b', '#3cb44b', '#ffe119', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
-
-    return {
-        labels: columns.map(col => this.formatColumnLabel(col)),
-        datasets: config.datasets.map((dataset, index) => {
-            const row = this.data[dataset.row_index];
-            const colorIndex = (chartIndex + index) % defaultColors.length;
-            
-            // Get the label using the stored first column name
-            const label = row[this.labelColumn] || `Dataset ${dataset.row_index + 1}`;
-            console.log(`Creating dataset for row ${dataset.row_index} with label: ${label}`);
-
-            return {
-                label: label,
-                data: columns.map(col => {
-                    let value = row[col];
-                    if (value === null || value === undefined || value === '') {
-                        return 0;
-                    }
-                    if (typeof value === 'string') {
-                        value = value.replace(/[$,]/g, '');
-                    }
-                    return parseFloat(value) || 0;
-                }),
-                borderColor: dataset.color || defaultColors[colorIndex],
-                backgroundColor: dataset.color || defaultColors[colorIndex],
-                fill: false,
-                tension: 0.1
-            };
-        })
-    };
-}
+    processChartData(data, config, chartIndex) {
+        console.log('Processing chart', chartIndex, 'with resetChartColors:', this.config.resetChartColors); // Add this line
+        const columns = this.getDataColumns();
+        const defaultColors = ['#4363d8', 'green', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#e6194b', '#3cb44b', '#ffe119', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
+    
+        // Reset color index if resetChartColors is true (default to continuing colors)
+        const colorStartIndex = this.config.resetChartColors ? 0 : chartIndex;
+        
+        return {
+            labels: columns.map(col => this.formatColumnLabel(col)),
+            datasets: config.datasets.map((dataset, index) => {
+                const row = this.data[dataset.row_index];
+                const colorIndex = (colorStartIndex + index) % defaultColors.length;
+                
+                const label = row[this.labelColumn] || `Dataset ${dataset.row_index + 1}`;
+                console.log(`Creating dataset for row ${dataset.row_index} with label: ${label}`);
+    
+                return {
+                    label: label,
+                    data: columns.map(col => {
+                        let value = row[col];
+                        if (value === null || value === undefined || value === '') {
+                            return 0;
+                        }
+                        if (typeof value === 'string') {
+                            value = value.replace(/[$,]/g, '');
+                        }
+                        return parseFloat(value) || 0;
+                    }),
+                    borderColor: dataset.color || defaultColors[colorIndex],
+                    backgroundColor: dataset.color || defaultColors[colorIndex],
+                    fill: false,
+                    tension: 0.1
+                };
+            })
+        };
+    }
 
 getDataColumns() {
     if (!this.data || !this.data[0]) return [];
