@@ -491,7 +491,7 @@ getDataColumns() {
         
         // Add download buttons
         const downloadButtons = document.createElement('div');
-        downloadButtons.className = 'mb-3 d-flex gap-2 justify-content-end';
+        downloadButtons.className = 'm-2 d-flex gap-2 justify-content-start';
         
         // Create buttons for each data source
         Object.entries(this.config.dataSources).forEach(([frequency, path]) => {

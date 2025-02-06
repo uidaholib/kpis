@@ -1,5 +1,5 @@
 ---
-title: Web
+title: Web - All Web Properties Combined
 layout: dashboard
 permalink: /web.html
 dashboard:
@@ -13,19 +13,19 @@ dashboard:
   show_table: true
   charts:
     - type: line
-      title: Total Visits Growth
+      title: Total Users and New Users
       datasets:
         - row_index: 0
-    - type: line
-      title: Unique Visitors Growth
-      datasets:
         - row_index: 1
-    - type: bar
-      title: Page Views by Year
+    - type: line
+      title: Views and Sessions
       datasets:
         - row_index: 2
-    - type: bar
-      title: Bounce Rate by Year
+        - row_index: 4
+        - row_index: 6
+    - type: line
+      title: Engagement Rates
       datasets:
         - row_index: 3
+        - row_index: 7
 ---
