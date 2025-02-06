@@ -248,12 +248,12 @@ window.KPIDashboard = class KPIDashboard {
 
     
     processChartData(data, config, chartIndex) {
-        console.log('Processing chart', chartIndex, 'with resetChartColors:', this.config.resetChartColors); // Add this line
+        console.log('Processing chart', chartIndex, 'with keepChartColorsSame:', this.config.keepChartColorsSame); // Add this line
         const columns = this.getDataColumns();
         const defaultColors = ['#4363d8', 'green', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#e6194b', '#3cb44b', '#ffe119', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
     
-        // Reset color index if resetChartColors is true (default to continuing colors)
-        const colorStartIndex = this.config.resetChartColors ? 0 : chartIndex;
+        // Reset color index if keepChartColorsSame is true (default to continuing colors)
+        const colorStartIndex = this.config.keepChartColorsSame ? 0 : chartIndex;
         
         return {
             labels: columns.map(col => this.formatColumnLabel(col)),

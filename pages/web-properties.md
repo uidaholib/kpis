@@ -2,7 +2,7 @@
 title: Web Stats Across Properties 
 layout: dashboard
 permalink: /web-properties.html
-resetChartColors: true
+keepChartColorsSame: true
 dashboard:
   container_id: webStats
   data_sources:

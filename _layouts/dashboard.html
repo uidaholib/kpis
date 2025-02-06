@@ -31,7 +31,7 @@ window.addEventListener('load', async function() {
             showTable: {{ page.dashboard.show_table | jsonify }},
             tableColumns: {{ page.dashboard.table_columns | jsonify }},
             chartTypes: {{ page.dashboard.charts | jsonify }},
-            resetChartColors: {{ page.resetChartColors | default: false }},
+            keepChartColorsSame: {{ page.keepChartColorsSame | default: false }},
             baseUrl: '{{ "" | relative_url }}' 
         });
         
