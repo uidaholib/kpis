@@ -1,10 +1,21 @@
 ---
 title: Units and Department Overview 2024-2025
 permalink: /units.html
-layout: about
+layout: page-narrow
 ---
 # Library Units Overview 
  
+<div class="team-nav my-5 w-100">
+  <select onchange="if (this.value) window.location.href=this.value" class="w-100 p-2">
+    <option value="">Jump to Unit...</option>
+    {% for team in site.data.teams-units %}
+      {% if team.type == "Unit" %}
+        <option value="#{{ team.name | slugify }}">{{ team.name }}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</div>
+
 {% for unit in site.data.teams-units %}
 {% if unit.type == "Unit" %}
 {% assign members = unit.members | split: ";" %}

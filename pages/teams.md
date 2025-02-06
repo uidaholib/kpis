@@ -1,10 +1,20 @@
 ---
 title: Teams Overview 2024-2025
 permalink: /teams.html
-layout: about
+layout: page-narrow
 ---
 # Library Teams Overview 
 
+<div class="team-nav my-5 w-100">
+  <select onchange="if (this.value) window.location.href=this.value" class="w-100 p-2">
+    <option value="">Jump to Team...</option>
+    {% for team in site.data.teams-units %}
+      {% if team.type == "Team" %}
+        <option value="#{{ team.name | slugify }}">{{ team.name }}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</div>
 
 {% for team in site.data.teams-units %}
 {% if team.type == "Team" %}
