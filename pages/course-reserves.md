@@ -32,4 +32,8 @@ dashboard:
       title: Items Added by Year
       datasets:
         - row_index: 3
+    - type: line
+      title: Estimated Student Savings
+      datasets:
+        - row_index: 4
 ---
