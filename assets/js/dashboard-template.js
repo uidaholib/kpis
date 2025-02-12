@@ -229,15 +229,56 @@ window.KPIDashboard = class KPIDashboard {
         }
     }
 
+    parseMonthYearDate(dateStr) {
+        // Handle various date formats
+        if (!dateStr) return null;
+        
+        // If the date is already in a Safari-friendly format (YYYY-MM-DD), use it directly
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+            return new Date(dateStr);
+        }
+        
+        // Handle "MMM YYYY" format (e.g., "Jun 2022")
+        const mmyyyy = /^([A-Za-z]{3})\s+(\d{4})$/;
+        if (mmyyyy.test(dateStr)) {
+            const [_, month, year] = dateStr.match(mmyyyy);
+            const monthIndex = new Date(`${month} 1, 2000`).getMonth();
+            return new Date(year, monthIndex);
+        }
+        
+        // Handle "MM/YYYY" or "M/YYYY" format
+        const mSlashYear = /^(\d{1,2})\/(\d{4})$/;
+        if (mSlashYear.test(dateStr)) {
+            const [_, month, year] = dateStr.match(mSlashYear);
+            return new Date(year, parseInt(month) - 1);
+        }
+        
+        // Try parsing with explicit day
+        try {
+            const date = new Date(dateStr + " 1");
+            if (!isNaN(date.getTime())) {
+                return date;
+            }
+        } catch (e) {
+            console.warn('Failed to parse date:', dateStr);
+        }
+        
+        return null;
+    }
+
     formatColumnLabel(column) {
         switch (this.currentFrequency) {
             case 'yearly':
                 return column.toLowerCase().startsWith('fy') ? `FY${column.slice(2)}` : column;
             case 'monthly':
-                return new Date(column).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short' 
-                });
+                const date = this.parseMonthYearDate(column);
+                if (date && !isNaN(date)) {
+                    return date.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short' 
+                    });
+                }
+                return column; // Fallback to original if parsing fails
             case 'triannual':
             case 'biannual':
                 return column; // Keep original term format (e.g., "Spring 2022")
