@@ -487,11 +487,28 @@ createChart(config, chartIndex) {
             columns.forEach(column => {
                 const td = document.createElement('td');
                 let value = row[column];
-                if (typeof value === 'string') {
-                    value = value.replace(/[$,]/g, ''); // Remove dollar signs and commas
+                
+                // Check for null, undefined, empty string, or 'N/A'
+                if (value === null || value === undefined || value === '' || value === 'N/A') {
+                    td.textContent = 'N/A';
+                } else {
+                    // Try to parse as number if it's a string containing a number
+                    if (typeof value === 'string') {
+                        value = value.replace(/[$,]/g, ''); // Remove dollar signs and commas
+                        if (!value || isNaN(value)) {
+                            td.textContent = 'N/A';
+                        } else {
+                            td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]);
+                        }
+                    } else {
+                        td.textContent = this.formatValue(value, row[this.labelColumn]);
+                    }
                 }
-                td.textContent = this.formatValue(parseFloat(value) || 0, row[this.labelColumn]);
+                
                 td.className = 'text-end'; // Right-align numeric data
+                if (td.textContent === 'N/A') {
+                    td.className += ' text-muted'; // Grey out N/A values
+                }
                 bodyRow.appendChild(td);
             });
             tbody.appendChild(bodyRow);
