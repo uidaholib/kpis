@@ -289,7 +289,6 @@ window.KPIDashboard = class KPIDashboard {
 
     
     processChartData(data, config, chartIndex) {
-        console.log('Processing chart', chartIndex, 'with keepChartColorsSame:', this.config.keepChartColorsSame); // Add this line
         const columns = this.getDataColumns();
         const defaultColors = ['#4363d8', 'green', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#e6194b', '#3cb44b', '#ffe119', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
     
@@ -303,24 +302,35 @@ window.KPIDashboard = class KPIDashboard {
                 const colorIndex = (colorStartIndex + index) % defaultColors.length;
                 
                 const label = row[this.labelColumn] || `Dataset ${dataset.row_index + 1}`;
-                console.log(`Creating dataset for row ${dataset.row_index} with label: ${label}`);
-    
+                
                 return {
                     label: label,
                     data: columns.map(col => {
                         let value = row[col];
-                        if (value === null || value === undefined || value === '') {
-                            return 0;
+                        
+                        // Handle various forms of null/empty values
+                        if (value === null || value === undefined || value === '' || value === 'N/A') {
+                            return null;  // Return null instead of 0
                         }
+                        
+                        // Clean string values
                         if (typeof value === 'string') {
                             value = value.replace(/[$,]/g, '');
+                            // If the cleaned string is empty or not a number, return null
+                            if (!value || isNaN(value)) {
+                                return null;
+                            }
                         }
-                        return parseFloat(value) || 0;
+                        
+                        const numValue = parseFloat(value);
+                        // If parsing results in NaN or 0, return null
+                        return !isNaN(numValue) ? numValue : null;
                     }),
                     borderColor: dataset.color || defaultColors[colorIndex],
                     backgroundColor: dataset.color || defaultColors[colorIndex],
                     fill: false,
-                    tension: 0.1
+                    tension: 0.1,
+                    spanGaps: true  // Enable spanning gaps for null values
                 };
             })
         };
@@ -360,46 +370,64 @@ getDataColumns() {
     }
 }
 
-    createChart(config, chartIndex) {
-        const canvas = document.createElement('canvas');
-        const chartContainer = document.createElement('div');
-        chartContainer.className = 'mb-4';
-        chartContainer.style.height = config.height || '400px';
-        chartContainer.appendChild(canvas);
+createChart(config, chartIndex) {
+    const canvas = document.createElement('canvas');
+    const chartContainer = document.createElement('div');
+    chartContainer.className = 'mb-4';
+    chartContainer.style.height = config.height || '400px';
+    chartContainer.appendChild(canvas);
 
-        const chart = new Chart(canvas, {
-            type: config.type,
-            data: this.processChartData(this.data, config, chartIndex),
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: config.title,
-                        font: { size: 16 }
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
+    const chart = new Chart(canvas, {
+        type: config.type,
+        data: this.processChartData(this.data, config, chartIndex),
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: config.title,
+                    font: { size: 16 }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            maxRotation: 45,
-                            minRotation: 45
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            // Return null for missing values
+                            if (context.raw === null) {
+                                return 'No data available';
+                            }
+                            return context.dataset.label + ': ' + context.raw;
                         }
-                    },
-                    y: {
-                        beginAtZero: true
                     }
                 }
-            }
-        });
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            // Format the value as needed
+                            return value;
+                        }
+                    }
+                }
+            },
+            spanGaps: true // Enable spanning gaps globally
+        }
+    });
 
-        this.charts.push(chart);
-        return chartContainer;
-    }
+    this.charts.push(chart);
+    return chartContainer;
+}
 
     renderCharts() {
         const chartContainer = this.container.querySelector('#chart') || 
