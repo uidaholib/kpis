@@ -292,7 +292,7 @@ window.KPIDashboard = class KPIDashboard {
         const columns = this.getDataColumns();
         const defaultColors = ['#4363d8', 'green', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#e6194b', '#3cb44b', '#ffe119', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
     
-        // Reset color index if keepChartColorsSame is true (default to continuing colors)
+        // Reset color index if keepChartColorsSame is true
         const colorStartIndex = this.config.keepChartColorsSame ? 0 : chartIndex;
         
         return {
@@ -308,29 +308,41 @@ window.KPIDashboard = class KPIDashboard {
                     data: columns.map(col => {
                         let value = row[col];
                         
-                        // Handle various forms of null/empty values
-                        if (value === null || value === undefined || value === '' || value === 'N/A') {
-                            return null;  // Return null instead of 0
+                        // Return undefined for truly empty values to create gaps
+                        if (value === null || value === undefined || value === '') {
+                            return undefined;  // Using undefined instead of null for blank spaces
                         }
                         
-                        // Clean string values
+                        // Handle string values
                         if (typeof value === 'string') {
-                            value = value.replace(/[$,]/g, '');
-                            // If the cleaned string is empty or not a number, return null
+                            // Remove commas first
+                            value = value.replace(/,/g, '');
+                            
+                            // Handle percentages
+                            if (value.includes('%')) {
+                                return parseFloat(value.replace('%', ''));
+                            }
+                            
+                            // Handle currency
+                            if (value.includes('$')) {
+                                return parseFloat(value.replace('$', ''));
+                            }
+                            
+                            // If empty after cleaning or not a number, return undefined
                             if (!value || isNaN(value)) {
-                                return null;
+                                return undefined;
                             }
                         }
                         
                         const numValue = parseFloat(value);
-                        // If parsing results in NaN or 0, return null
-                        return !isNaN(numValue) ? numValue : null;
+                        // Return undefined for NaN, but keep 0 values
+                        return !isNaN(numValue) ? numValue : undefined;
                     }),
                     borderColor: dataset.color || defaultColors[colorIndex],
                     backgroundColor: dataset.color || defaultColors[colorIndex],
                     fill: false,
                     tension: 0.1,
-                    spanGaps: true  // Enable spanning gaps for null values
+                    spanGaps: true  // Enable spanning gaps for undefined values
                 };
             })
         };
@@ -395,11 +407,14 @@ createChart(config, chartIndex) {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            // Return null for missing values
-                            if (context.raw === null) {
-                                return 'No data available';
+                            if (context.raw === undefined) {
+                                return context.dataset.label + ': No data';
                             }
-                            return context.dataset.label + ': ' + context.raw;
+                            // Check if it's a percentage metric based on the label
+                            const isPercentage = context.dataset.label.toLowerCase().includes('rate') || 
+                                               context.dataset.label.toLowerCase().includes('percent');
+                            return context.dataset.label + ': ' + 
+                                   (isPercentage ? context.raw.toFixed(2) + '%' : context.raw.toFixed(2));
                         }
                     }
                 }
@@ -414,9 +429,9 @@ createChart(config, chartIndex) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) {
-                            // Format the value as needed
-                            return value;
+                        callback: function(value, index, values) {
+                            // Format Y-axis values
+                            return value + '%';
                         }
                     }
                 }
@@ -490,13 +505,13 @@ createChart(config, chartIndex) {
                 
                 // Check for null, undefined, empty string, or 'N/A'
                 if (value === null || value === undefined || value === '' || value === 'N/A') {
-                    td.textContent = 'N/A';
+                    td.textContent = '';
                 } else {
                     // Try to parse as number if it's a string containing a number
                     if (typeof value === 'string') {
                         value = value.replace(/[$,]/g, ''); // Remove dollar signs and commas
                         if (!value || isNaN(value)) {
-                            td.textContent = 'N/A';
+                            td.textContent = '';
                         } else {
                             td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]);
                         }
