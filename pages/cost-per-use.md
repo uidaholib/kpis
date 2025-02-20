@@ -12,7 +12,7 @@ dashboard:
   show_table: true
   charts:
     - type: line
-      title: Total Courses Growth
+      title: Total Courses 
       datasets:
         - row_index: 0
     - type: line

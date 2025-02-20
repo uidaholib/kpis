@@ -17,11 +17,11 @@ dashboard:
     - Items Added
   charts:
     - type: line
-      title: Total Courses Growth
+      title: Total Courses 
       datasets:
         - row_index: 0
     - type: line
-      title: Total Items Growth
+      title: Total Items 
       datasets:
         - row_index: 1
     - type: bar

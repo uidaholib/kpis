@@ -17,11 +17,11 @@ dashboard:
     - Items Added
   charts:
     - type: line
-      title: Total Collections Growth
+      title: Total Collections 
       datasets:
         - row_index: 0
     - type: line
-      title: Total Items Growth
+      title: Total Items 
       datasets:
         - row_index: 1
           color: green

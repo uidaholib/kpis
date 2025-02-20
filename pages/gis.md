@@ -19,7 +19,7 @@ dashboard:
     - Item Views
   charts:
     - type: line
-      title: User Growth
+      title: User 
       datasets:
         - row_index: 0
         - row_index: 1
