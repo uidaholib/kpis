@@ -431,7 +431,7 @@ createChart(config, chartIndex) {
                     ticks: {
                         callback: function(value, index, values) {
                             // Format Y-axis values
-                            return value + '%';
+                            return value;
                         }
                     }
                 }
@@ -513,7 +513,12 @@ createChart(config, chartIndex) {
                         if (!value || isNaN(value)) {
                             td.textContent = '';
                         } else {
-                            td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]);
+                            // Check if the original value contained a percentage
+                            if (row[this.labelColumn].toLowerCase().includes('rate') || value.includes('%')) {
+                                td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]) + '%';
+                            } else {
+                                td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]);
+                            }
                         }
                     } else {
                         td.textContent = this.formatValue(value, row[this.labelColumn]);
