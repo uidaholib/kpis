@@ -505,7 +505,7 @@ createChart(config, chartIndex) {
                 
                 // Check for null, undefined, empty string, or 'N/A'
                 if (value === null || value === undefined || value === '' || value === 'N/A') {
-                    td.textContent = '';
+                       td.textContent = '';
                 } else {
                     // Try to parse as number if it's a string containing a number
                     if (typeof value === 'string') {
