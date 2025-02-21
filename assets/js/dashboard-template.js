@@ -513,12 +513,7 @@ createChart(config, chartIndex) {
                         if (!value || isNaN(value)) {
                             td.textContent = '';
                         } else {
-                            // Check if the original value contained a percentage
-                            if (row[this.labelColumn].toLowerCase().includes('rate') || value.includes('%')) {
-                                td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]) + '%';
-                            } else {
-                                td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]);
-                            }
+                            td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]);
                         }
                     } else {
                         td.textContent = this.formatValue(value, row[this.labelColumn]);

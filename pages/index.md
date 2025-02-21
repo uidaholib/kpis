@@ -14,13 +14,27 @@ permalink: /
 {% assign teamlink = '/teams.html' |relative_url %}
 {% assign unitlink = '/units.html' |relative_url %}
 
+
+
 <h2>Overview Documents</h2>
 
-{% include feature/button.html text="Library Annual Manual" link=manuallink color="outline-success btn-lg my-3" %}
+{% include feature/button.html text="Annual Manual" link=manuallink color="outline-success btn-lg my-3" %}
 
-{% include feature/button.html text="Teams Overview" link=teamlink color="outline-success btn-lg ms-3" %} 
+{% include feature/button.html text="Teams Overview" link=teamlink color="outline-success btn-lg " %} 
 
-{% include feature/button.html text="Unit Overview" link=unitlink color="outline-success btn-lg m-3" %} 
+{% include feature/button.html text="Unit Overview" link=unitlink color="outline-success btn-lg " %} 
+
+<button class="btn btn-outline-secondary btn-lg dropdown-toggle" type="button" id="docsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+  Docs
+</button>
+<ul class="dropdown-menu" aria-labelledby="docsDropdown">
+  {% for item in site.data.config-nav %}
+    {% if item.dropdown_parent == "Docs" %}
+      <li><a class="dropdown-item" href="{{ item.stub | relative_url }}" target="_blank">{{ item.display_name }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
 
 <hr>
 

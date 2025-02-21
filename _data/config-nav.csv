@@ -1,4 +1,4 @@
-display_name,stub,dropdown_parent
+display_name,stub,dropdown_parent,target_blank
 Teams,/teams.html
 Units,/units.html
 KPIs,
@@ -18,3 +18,9 @@ Special Collections & Archives,/special-collections.html,KPIs
 Student Employment,/student-employment.html,KPIs
 VERSO (Research Information Management),/verso.html,KPIs
 Web Properties,/web.html,KPIs
+Docs
+Annual Manual,/assets/pdf/LibraryAnnualManual24-25.pdf,Docs,true
+Library Employee Libguide,https://libguides.uidaho.edu/c.php?g=866557&p=6217071,Docs,true
+Digital Docs,https://uidaholib.github.io/digital-collections-docs/,Docs,true
+Spec Docs,https://uidaholib.github.io/spec-docs/,Docs,true
+Verso Docs,https://uidaholib.github.io/verso-docs/,Docs,true
