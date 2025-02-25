@@ -8,7 +8,6 @@ dashboard:
   data_sources:
     monthly: /kpidata/web-properties.csv
   default_frequency: monthly
-  show_frequency_toggle: true
   default_tab: chart
   show_table: true
   charts:

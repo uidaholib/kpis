@@ -7,7 +7,6 @@ dashboard:
   data_sources:
     biannual: /kpidata/instruction.csv
   default_frequency: biannual
-  show_frequency_toggle: false
   default_tab: chart
   show_table: true
   charts:

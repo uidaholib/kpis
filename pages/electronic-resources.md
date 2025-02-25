@@ -7,7 +7,6 @@ dashboard:
   data_sources:
     triannual: /kpidata/electronic-resources.csv
   default_frequency: triannual
-  show_frequency_toggle: false
   default_tab: chart
   show_table: true
   charts:

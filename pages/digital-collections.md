@@ -7,7 +7,6 @@ dashboard:
   data_sources:
     yearly: /kpidata/digital-collections.csv
   default_frequency: yearly
-  show_frequency_toggle: false
   default_tab: chart
   show_table: true
   table_columns:
