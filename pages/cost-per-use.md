@@ -12,15 +12,15 @@ dashboard:
   show_table: true
   charts:
     - type: line
-      title: Total Courses 
+      title: E-Journals Cost Per Use
       datasets:
         - row_index: 0
     - type: line
-      title: E-Books
+      title: E-Books Cost Per Use
       datasets:
         - row_index: 1
     - type: line
-      title: Streaming Video (Fiscal Year Data)
+      title: Streaming Video Cost Per Use (Fiscal Year Data)
       datasets:
         - row_index: 2
 ---

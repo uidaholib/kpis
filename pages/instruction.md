@@ -1,5 +1,5 @@
 ---
-title: Instruction
+title: Instruction (Course Based and Workshops)
 layout: dashboard
 permalink: /instruction.html
 dashboard:

@@ -16,7 +16,7 @@ dashboard:
       datasets:
         - row_index: 0
     - type: line
-      title: Room/MILL Reservations
+      title: Room/Services Reservations
       datasets:
         - row_index: 1
         - row_index: 2

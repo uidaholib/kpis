@@ -10,26 +10,21 @@ dashboard:
   show_frequency_toggle: false
   default_tab: chart
   show_table: true
-  table_columns:
-    - Total Courses
-    - Total Items
-    - Courses Added
-    - Items Added
   charts:
     - type: line
-      title: Total Courses 
+      title: Courses Sections Using Reserves
       datasets:
         - row_index: 0
     - type: line
-      title: Total Items 
+      title: Students Using Reserves
       datasets:
         - row_index: 1
     - type: bar
-      title: Courses Added by Year
+      title: Physical Reserve Item Circulations
       datasets:
         - row_index: 2
     - type: bar
-      title: Items Added by Year
+      title: Electronic Reserve Item Circulation
       datasets:
         - row_index: 3
     - type: line
