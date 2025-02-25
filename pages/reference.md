@@ -4,7 +4,7 @@ layout: dashboard
 permalink: /research-assistance.html
 dashboard:
   data_sources:
-    triannual: /kpidata/reference.csv
+    triannual: /kpidata/reference-by-term.csv
     yearly: /kpidata/reference-yearly.csv
   default_frequency: yearly
   default_tab: chart
