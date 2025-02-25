@@ -26,7 +26,6 @@ window.addEventListener('load', async function() {
             containerId: '{{ page.dashboard.container_id }}',
             dataSources: {{ page.dashboard.data_sources | jsonify }},
             defaultFrequency: '{{ page.dashboard.default_frequency }}',
-            showFrequencyToggle: {{ page.dashboard.show_frequency_toggle }},
             defaultTab: '{{ page.dashboard.default_tab }}',
             showTable: {{ page.dashboard.show_table | jsonify }},
             tableColumns: {{ page.dashboard.table_columns | jsonify }},

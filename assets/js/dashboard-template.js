@@ -21,6 +21,9 @@ window.KPIDashboard = class KPIDashboard {
         this.tableColumns = config.tableColumns || [];
         this.rowLabels = []; // Store row labels separately
         
+        // Show frequency toggle if there are multiple data sources
+        this.showFrequencyToggle = Object.keys(this.config.dataSources).length > 1;
+
         // Initialize the basic structure
         this.initializeStructure();
     }
@@ -30,7 +33,7 @@ window.KPIDashboard = class KPIDashboard {
         this.container.innerHTML = '';
 
         // Create toggle container
-        if (this.config.showFrequencyToggle) {
+        if (this.showFrequencyToggle) {  // Changed from this.config.showFrequencyToggle
             const toggleContainer = document.createElement('div');
             toggleContainer.className = 'frequency-toggle-container mb-4';
             this.container.appendChild(toggleContainer);
@@ -45,7 +48,7 @@ window.KPIDashboard = class KPIDashboard {
     async init() {
         try {
             await this.loadData(this.currentFrequency);
-            if (this.config.showFrequencyToggle) {
+            if (this.showFrequencyToggle) {  // Changed from this.config.showFrequencyToggle
                 this.setupFrequencyToggle();
             }
             this.renderContent();
@@ -410,16 +413,37 @@ createChart(config, chartIndex) {
                             if (context.raw === undefined) {
                                 return context.dataset.label + ': No data';
                             }
-                            // Check if it's a percentage metric based on the label
-                            const isPercentage = context.dataset.label.toLowerCase().includes('rate') || 
-                                               context.dataset.label.toLowerCase().includes('percent');
-                            return context.dataset.label + ': ' + 
-                                   (isPercentage ? context.raw.toFixed(2) + '%' : context.raw.toFixed(2));
+                            
+                            const label = context.dataset.label.toLowerCase();
+                            const value = context.raw;
+                            
+                            // Check if this dataset should be currency based on label and original data
+                            const isCurrency = label.includes('amount') || 
+                                             label.includes('savings') || 
+                                             label.includes('cost') || 
+                                             label.includes('$') || 
+                                             label.includes('price') || 
+                                             label.includes('cpu');
+                            
+                            // Format the value
+                            let formattedValue;
+                            if (isCurrency) {
+                                formattedValue = '$' + value.toLocaleString(undefined, {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                            } else if (label.includes('rate') || label.includes('percent')) {
+                                formattedValue = (Number.isInteger(value) ? value.toString() : value.toFixed(2)) + '%';
+                            } else {
+                                formattedValue = Number.isInteger(value) ? value.toString() : value.toFixed(2);
+                            }
+                            
+                            return context.dataset.label + ': ' + formattedValue;
                         }
                     }
                 }
             },
-            scales: {
+            scales: {  // Move scales out of plugins
                 x: {
                     ticks: {
                         maxRotation: 45,
@@ -430,7 +454,24 @@ createChart(config, chartIndex) {
                     beginAtZero: true,
                     ticks: {
                         callback: function(value, index, values) {
-                            // Format Y-axis values
+                            // Check dataset labels to determine if this is a currency chart
+                            const datasets = this.chart.data.datasets;
+                            const isCurrency = datasets.some(dataset => {
+                                const label = dataset.label.toLowerCase();
+                                return label.includes('amount') || 
+                                       label.includes('savings') || 
+                                       label.includes('cost') || 
+                                       label.includes('$') || 
+                                       label.includes('price') || 
+                                       label.includes('cpu');
+                            });
+                            
+                            if (isCurrency) {
+                                return '$' + value.toLocaleString(undefined, {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                            }
                             return value;
                         }
                     }

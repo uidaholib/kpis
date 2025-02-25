@@ -6,16 +6,16 @@ dashboard:
   container_id: researchAssistance
   data_sources:
     triannual: /kpidata/reference.csv
-  default_frequency: triannual
-  show_frequency_toggle: false
+    yearly: /kpidata/reference-yearly.csv
+  default_frequency: yearly
   default_tab: chart
   show_table: true
   charts:
-    - type: bar
+    - type: line
       title: Total Interactions
       datasets:
         - row_index: 0
-    - type: bar
+    - type: line
       title: Interactions by Type
       datasets:
         - row_index: 1
