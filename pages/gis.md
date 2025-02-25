@@ -19,7 +19,7 @@ dashboard:
     - Item Views
   charts:
     - type: line
-      title: User 
+      title: Users and Creators
       datasets:
         - row_index: 0
         - row_index: 1
