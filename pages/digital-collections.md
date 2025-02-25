@@ -3,12 +3,10 @@ title: Digital Collections
 layout: dashboard
 permalink: /digital-collections.html
 dashboard:
-  container_id: digitalCollections
   data_sources:
     yearly: /kpidata/digital-collections.csv
   default_frequency: yearly
   default_tab: chart
-  show_table: true
   table_columns:
     - Total Collections
     - Total Items

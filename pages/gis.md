@@ -3,13 +3,11 @@ title: Geographic Information Systems (GIS)
 layout: dashboard
 permalink: /gis.html
 dashboard:
-  container_id: gisUsage
   data_sources:
     yearly: /kpidata/gis-yearly.csv
     monthly: /kpidata/gis-monthly.csv
   default_frequency: yearly
   default_tab: chart
-  show_table: true
   table_columns:
     - Unique Users	
     - New Users	

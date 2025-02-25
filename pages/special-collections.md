@@ -3,12 +3,10 @@ title: Special Collections
 layout: dashboard
 permalink: /special-collections.html
 dashboard:
-  container_id: specialCollections
   data_sources:
     yearly: /kpidata/special-collections.csv
   default_frequency: yearly
   default_tab: chart
-  show_table: true
   charts:
     - type: bar
       title: Finding Aids

@@ -3,12 +3,10 @@ title: Fellowships
 layout: dashboard
 permalink: /fellowships.html
 dashboard:
-  container_id: fellowshipStats
   data_sources:
     yearly: /kpidata/fellowships.csv
   default_frequency: yearly
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Fellowships Awarded

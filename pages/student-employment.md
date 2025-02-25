@@ -3,12 +3,10 @@ title: Student Employment
 layout: dashboard
 permalink: /student-employment.html
 dashboard:
-  container_id: studentEmployment
   data_sources:
     triannual: /kpidata/student-employment.csv
   default_frequency: triannual
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Student Workers

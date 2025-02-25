@@ -4,12 +4,10 @@ layout: dashboard
 permalink: /web-properties.html
 keepChartColorsSame: true
 dashboard:
-  container_id: webStats
   data_sources:
     monthly: /kpidata/web-properties.csv
   default_frequency: monthly
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Total Users

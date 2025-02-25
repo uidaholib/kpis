@@ -3,12 +3,10 @@ title: Resource Sharing (Summit and ILL)
 layout: dashboard
 permalink: /resource-sharing.html
 dashboard:
-  container_id: illStats
   data_sources:
     triannual: /kpidata/resource-sharing.csv
   default_frequency: triannual
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: ILL Borrowing and Loaning

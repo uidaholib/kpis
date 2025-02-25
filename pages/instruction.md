@@ -3,12 +3,10 @@ title: Instruction (Course Based and Workshops)
 layout: dashboard
 permalink: /instruction.html
 dashboard:
-  container_id: instructionStats
   data_sources:
     biannual: /kpidata/instruction.csv
   default_frequency: biannual
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Sessions Overview

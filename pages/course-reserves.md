@@ -3,12 +3,10 @@ title: Course Reserves
 layout: dashboard
 permalink: /course-reserves.html
 dashboard:
-  container_id: courseReserves
   data_sources:
     triannual: /kpidata/course-reserves.csv
   default_frequency: triannual
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Courses Sections Using Reserves

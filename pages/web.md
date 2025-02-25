@@ -3,13 +3,11 @@ title: Web - All Web Properties Combined
 layout: dashboard
 permalink: /web.html
 dashboard:
-  container_id: webStats
   data_sources:
     yearly: /kpidata/web-all-yearly.csv
     monthly: /kpidata/web-all-monthly.csv
   default_frequency: monthly
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Total Users and New Users

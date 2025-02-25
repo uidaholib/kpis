@@ -3,12 +3,10 @@ title: Electronic Resources
 layout: dashboard
 permalink: /electronic-resources.html
 dashboard:
-  container_id: electronicStats
   data_sources:
     triannual: /kpidata/electronic-resources.csv
   default_frequency: triannual
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Database and Journal Usage

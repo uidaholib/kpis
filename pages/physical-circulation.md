@@ -3,12 +3,10 @@ title: Physical Circulation
 layout: dashboard
 permalink: /physical-circulation.html
 dashboard:
-  container_id: electronicStats
   data_sources:
     triannual: /kpidata/circulation.csv
   default_frequency: triannual
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Print Checkouts and Renewals

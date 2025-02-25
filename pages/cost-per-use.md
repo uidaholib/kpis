@@ -3,12 +3,10 @@ title: Cost Per Use - Electronic Resources
 layout: dashboard
 permalink: /cost-per-use.html
 dashboard:
-  container_id: cost-per-use
   data_sources:
     yearly: /kpidata/cost-per-use.csv
   default_frequency: yearly
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: E-Journals Cost Per Use

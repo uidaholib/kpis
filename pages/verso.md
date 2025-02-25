@@ -3,12 +3,10 @@ title: Verso
 layout: dashboard
 permalink: /verso.html
 dashboard:
-  container_id: versoStats
   data_sources:
     biannual: /kpidata/verso.csv
   default_frequency: biannual
   default_tab: chart
-  show_table: true
   charts:
     - type: bar
       title: Total Profiles

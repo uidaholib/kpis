@@ -3,13 +3,11 @@ title: Research and Reference Assistance
 layout: dashboard
 permalink: /research-assistance.html
 dashboard:
-  container_id: researchAssistance
   data_sources:
     triannual: /kpidata/reference.csv
     yearly: /kpidata/reference-yearly.csv
   default_frequency: yearly
   default_tab: chart
-  show_table: true
   charts:
     - type: line
       title: Total Interactions

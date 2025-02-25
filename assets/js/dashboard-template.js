@@ -2,29 +2,32 @@
 
 window.KPIDashboard = class KPIDashboard {
     constructor(config) {
+        // Generate containerId from URL if not provided
+        const urlPath = window.location.pathname;
+        const defaultContainerId = urlPath.split('/').pop().replace('.html', '');
+
         this.config = {
-            containerId: '',
+            containerId: defaultContainerId,
             dataSources: {},
             defaultFrequency: 'yearly',
-            showFrequencyToggle: false,
             defaultTab: 'chart',
-            showTable: true,
             frequencies: ['yearly', 'monthly', 'triannual', 'biannual'],
-            rowMappings: [], // New property for explicit row mappings
+            rowMappings: [],
             ...config
         };
-        console.log('Dashboard config:', config); // Add this line to verify config
+
         this.charts = [];
         this.container = document.getElementById(this.config.containerId);
         this.data = null;
         this.currentFrequency = this.config.defaultFrequency;
         this.tableColumns = config.tableColumns || [];
-        this.rowLabels = []; // Store row labels separately
+        this.rowLabels = [];
         
-        // Show frequency toggle if there are multiple data sources
         this.showFrequencyToggle = Object.keys(this.config.dataSources).length > 1;
+        
+        // Always show table
+        this.showTable = true;
 
-        // Initialize the basic structure
         this.initializeStructure();
     }
 
