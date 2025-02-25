@@ -4,11 +4,12 @@ layout: dashboard
 permalink: /verso.html
 dashboard:
   data_sources:
-    biannual: /kpidata/verso.csv
-  default_frequency: biannual
+    triannual: /kpidata/verso-by-term.csv
+    yearly: /kpidata/verso-yearly.csv
+  default_frequency: triannual
   default_tab: chart
   charts:
-    - type: bar
+    - type: line
       title: Total Profiles
       datasets:
         - row_index: 0
@@ -18,12 +19,12 @@ dashboard:
         - row_index: 1
         - row_index: 2
     - type: bar
-      title: Research Assets and Number of Articles
+      title: Research Assets and Number of Articles Added
       datasets:
         - row_index: 3
         - row_index: 4
-    - type: bar
-      title: Non-Article Assets
+    - type: line
+      title: Non-Article Assets Added
       datasets:
         - row_index: 5
         - row_index: 6
