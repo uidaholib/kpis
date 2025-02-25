@@ -31,6 +31,15 @@
                 </li>
                 {% endif %}
                 {%- endfor -%}
+                <li class="nav-item dropdown">
+                    <a class="nav-link  dropdown-toggle{% if page.layout == 'dashboard' %} active{% endif %}" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">KPIs</a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        {% for k in site.data.kpi-sections %}
+                        <a href="{{ k.url | relative_url }}" class="dropdown-item {% if page.url == k.url %}active{% endif %}">{{k.title}}
+                        </a>
+                        {% endfor%}
+                    </div>
+                </li>
             </ul>
             
             

@@ -4,14 +4,14 @@ Catalog,/catalog.html,bi bi-search
 Course Reserves,/course-reserves.html,bi bi-book
 Digital Collections,/digital-collections.html,bi bi-collection
 Electronic Resources,/electronic-resources.html,bi bi-journals
-ER Cost Per Use,/cost-per-use.html,bi bi-cash-stack
+"ER - Cost Per Use",/cost-per-use.html,bi bi-cash-stack
 Fellowships,/fellowships.html,bi bi-award
 Geographic Information Systems,/gis.html,bi bi-pin-map
 Instruction and Workshops,/instruction.html,bi bi-mortarboard
 Open Publishing,/open-publishing.html,bi bi-journal-richtext
 Physical Circulation,/physical-circulation.html,bi bi-box-seam
 Research and Reference Assistance,/research-assistance.html,bi bi-question-circle
-Resource Sharing,/resource-sharing.html,bi bi-share
+Resource Sharing (ILL),/resource-sharing.html,bi bi-share
 Special Collections & Archives,/special-collections.html,bi bi-archive
 Student Employment,/student-employment.html,bi bi-person-workspace
 VERSO (Research Information Management),/verso.html,bi bi-diagram-3

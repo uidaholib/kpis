@@ -4,7 +4,8 @@ layout: default
 ---
 <h2 class="ps-3 py-2">{{ page.title }}</h2>
 
-<div id="{{ page.dashboard.container_id }}"></div>
+<div id="{{ page.permalink | remove: '.html' | remove: '/' }}"></div>
+
 
 <!-- Required libraries -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -23,7 +24,7 @@ window.addEventListener('load', async function() {
 
     try {
         const dashboard = new KPIDashboard({
-            containerId: '{{ page.dashboard.container_id }}',
+            containerId: '{{ page.permalink | remove: '.html' | remove: '/' }}',
             dataSources: {{ page.dashboard.data_sources | jsonify }},
             defaultFrequency: '{{ page.dashboard.default_frequency }}',
             defaultTab: '{{ page.dashboard.default_tab }}',
