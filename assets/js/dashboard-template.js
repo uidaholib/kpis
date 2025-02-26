@@ -11,6 +11,7 @@ window.KPIDashboard = class KPIDashboard {
             dataSources: {},
             defaultFrequency: 'yearly',
             defaultTab: 'chart',
+            showTable: true,
             frequencies: ['yearly', 'monthly', 'triannual', 'biannual'],
             rowMappings: [],
             ...config
@@ -595,7 +596,7 @@ createChart(config, chartIndex) {
         const contentContainer = this.container.querySelector('.dashboard-content');
         if (!contentContainer) return;
     
-        if (this.config.showTable) {
+        if (this.showTable) {
             contentContainer.innerHTML = `
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -627,7 +628,7 @@ createChart(config, chartIndex) {
         }
     
         this.renderCharts();
-        if (this.config.showTable) {
+        if (this.showTable) {
             this.renderTable();
         }
     }
