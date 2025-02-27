@@ -183,23 +183,29 @@ window.KPIDashboard = class KPIDashboard {
         if (typeof value !== 'number') return value;
         
         const metricLower = metricName.toLowerCase();
-        // Format based on metric type
-        if (metricLower.includes('rate') || metricLower.includes('per')) {
+        
+        // Handle engagement rate specifically
+        if (metricLower.includes('engagement rate')) {
             return value.toFixed(2) + '%';
         }
-        if (metricLower.includes('duration')) {
-            const hours = Math.floor(value / 3600);
-            const minutes = Math.floor((value % 3600) / 60);
+        
+        // Handle average session duration
+        if (metricLower.includes('average session duration')) {
+            // Assuming duration is in seconds
+            const minutes = Math.floor(value / 60);
             const seconds = Math.floor(value % 60);
-            return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
+        
+        // Handle currency
         if (metricLower.includes('savings') || metricLower.includes('cost')) {
             return new Intl.NumberFormat('en-US', { 
                 style: 'currency', 
                 currency: 'USD' 
             }).format(value);
         }
-        // Format large numbers with commas
+        
+        // Format large numbers with commas by default
         return value.toLocaleString();
     }
 
@@ -546,28 +552,18 @@ createChart(config, chartIndex) {
             // Add data columns
             columns.forEach(column => {
                 const td = document.createElement('td');
-                let value = row[column];
+                const value = row[column];
                 
-                // Check for null, undefined, empty string, or 'N/A'
+                // Simply display the raw value from CSV
                 if (value === null || value === undefined || value === '' || value === 'N/A') {
-                       td.textContent = '';
+                    td.textContent = '';
                 } else {
-                    // Try to parse as number if it's a string containing a number
-                    if (typeof value === 'string') {
-                        value = value.replace(/[$,]/g, ''); // Remove dollar signs and commas
-                        if (!value || isNaN(value)) {
-                            td.textContent = '';
-                        } else {
-                            td.textContent = this.formatValue(parseFloat(value), row[this.labelColumn]);
-                        }
-                    } else {
-                        td.textContent = this.formatValue(value, row[this.labelColumn]);
-                    }
+                    td.textContent = value;
                 }
                 
                 td.className = 'text-end'; // Right-align numeric data
                 if (td.textContent === 'N/A') {
-                    td.className += ' text-muted'; // Grey out N/A values
+                    td.className += ' text-muted';
                 }
                 bodyRow.appendChild(td);
             });
