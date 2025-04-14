@@ -34,6 +34,16 @@ permalink: /
     {% endif %}
   {% endfor %}
 </ul>
+<button class="btn btn-outline-secondary btn-lg dropdown-toggle" type="button" id="docsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+  Forms
+</button>
+<ul class="dropdown-menu" aria-labelledby="docsDropdown">
+  {% for item in site.data.config-nav %}
+    {% if item.dropdown_parent == "Forms" %}
+      <li><a class="dropdown-item" href="{{ item.stub | relative_url }}" target="_blank">{{ item.display_name }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
 
 
 <hr>
