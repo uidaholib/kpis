@@ -7,7 +7,7 @@ class InstructionCharts {
   
     async init() {
       try {
-        const response = await fetch('/kpidata/instruction.csv');
+        const response = await fetch('/kpidata/instruction-from-form.csv');
         const csvText = await response.text();
         await this.processData(csvText);
         this.render();
@@ -57,11 +57,14 @@ class InstructionCharts {
   
       // Generate all semester periods from Fall 2016 to Fall 2024
       const periods = [];
-      for (let year = 2016; year <= 2024; year++) {
+      for (let year = 2016; year <= 2025; year++) {
         if (year > 2016) { // Start with Fall 2016, so only add Spring for subsequent years
           periods.push(`Spring ${year}`);
         }
-        periods.push(`Fall ${year}`);
+         if (year < 2025) { // Start with Fall 2016, so only add Spring for subsequent years
+           periods.push(`Fall ${year}`);
+        }
+       
       }
   
       this.data = periods.map(period => {
@@ -69,7 +72,7 @@ class InstructionCharts {
         const range = this.getSemesterRange(semester, parseInt(year));
   
         const periodData = processedData.filter(row => 
-          row.date >= range.start && row.date <= range.end
+          row.date >= range.start && row.date < range.end  // Change <= to < to match learner-stats.js
         );
   
         const instruction = periodData.filter(row => 
