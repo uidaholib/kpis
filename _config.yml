@@ -62,6 +62,23 @@ organization-logo-nav: https://www.lib.uidaho.edu/media/digital/liblogo_white.pn
 # noindex: true 
 
 ##########
+# COLLECTIONS
+#
+# Define collections for final reports
+collections:
+  final_reports24_25:
+    output: true
+    permalink: /final-reports/:name/
+
+# Set default values for collection posts
+defaults:
+  - scope:
+      path: ""
+      type: "final_reports24_25"
+    values:
+      layout: "page"
+
+##########
 # BUILD SETTINGS 
 #
 # Note: use environment variable on build command to include analytics

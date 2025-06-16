@@ -19,13 +19,17 @@ layout: page-narrow
 {% for team in site.data.teams-units %}
 {% if team.type == "Team" %}
 {% assign members = team.members | split: ";" %}
-{% assign pdflink = team.objectid | prepend: '/assets/pdf/' | append: '.pdf' |relative_url %}
+{% assign pdflink = team.objectid | prepend: '/assets/pdf24_25/' | append: '.pdf' |relative_url %}
 
 ## {{team.name}} 
 
 *Overview and Objectives:* {{team.overview}}
 
 *Fall Update:* {{team.fall-update}}
+
+*Spring Update:* {{team.spring-update}}
+
+*Final Outcomes:* {{team.final-reflections}}
 
 {% include feature/button.html text="Download Overview Document" link=pdflink color="outline-primary"  target="true" %}
 
