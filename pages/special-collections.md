@@ -9,16 +9,19 @@ dashboard:
   default_tab: chart
   charts:
     - type: bar
-      title: Finding Aids
+      title: Finding Aids Total
       datasets:
         - row_index: 0
+    - type: bar
+      title: Finding Aids Added/Revised
+      datasets:
         - row_index: 1
         - row_index: 2
-    - type: bar
+    - type: line
       title: Archives West Data
       datasets:
         - row_index: 3
-    - type: bar
+    - type: line
       title: Patron Interactions
       datasets:
         - row_index: 4

@@ -6,7 +6,7 @@ dashboard:
   data_sources:
     triannual: /kpidata/reference-by-term.csv
     yearly: /kpidata/reference-yearly.csv
-  default_frequency: yearly
+  default_frequency: triannual
   default_tab: chart
   charts:
     - type: line
