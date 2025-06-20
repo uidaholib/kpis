@@ -11,6 +11,7 @@ This collection contains the final reports for the 2024-25 academic year.
 ## Available Reports
 
 - [Aeu](/final-reports/aeu/)
+- [All](/final-reports/all/)
 - [Ats](/final-reports/ats/)
 - [Collections](/final-reports/collections/)
 - [Dau](/final-reports/dau/)
@@ -21,6 +22,7 @@ This collection contains the final reports for the 2024-25 academic year.
 - [Instruction](/final-reports/instruction/)
 - [Liaisons](/final-reports/liaisons/)
 - [Marcom](/final-reports/marcom/)
+- [Mentorship](/final-reports/mentorship/)
 - [Open Strategies](/final-reports/open-strategies/)
 - [Physical Spaces](/final-reports/physical-spaces/)
 - [Rel](/final-reports/rel/)
