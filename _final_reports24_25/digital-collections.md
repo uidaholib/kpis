@@ -152,24 +152,25 @@ this process is underway over the course of summer 2025)
 - Average session duration: 00:03:22
 - Engaged sessions: 98,508
 - Engagement rate: 55.18%
-▪ Spring Update: from Combined Digital Collection Report, Jan.2-June 10th
-- Total users: 148,388
-  - 27.6% increase
-- New users: 138,365
-  - 25.9% increase
-- Views: 1,123,587
-  - 98.5% increase
-- Views per user: 7.62
-  - 55.6% increase
+▪ Spring Update: from Digital Properties (www.lib.uidaho.edu/digital/ +
+cdil.lib.uidaho.edu) Jan.2-June 10th
+- Total users: 64,070
+  - 16.7% increase
+- New users: 58.256
+  - 14.8% increase
+- Views: 322,483
+  - 12.6% increase
+- Views per user: 5.08
+  - 5.08 decrease
 
-- Sessions: 445,366
-  - 124.9% increase
-- Average session duration: 00:03:43
-  - 6.6% increase
-- Engaged sessions: 201,602
-  - 88.1% increase
-- Engagement rate: 45.27%
-  - 16.4% decrease
+- Sessions: 88,281
+  - 18% increase
+- Average session duration: 00:03:53
+  - 63.6% increase
+- Engaged sessions: 51,303
+  - 18.1% increase
+- Engagement rate: 58.11%
+  - .1% increase
   - # and type of record revision contacts (“contact us about this record”)
 ▪ Fall update: 3
 ▪ Spring update: 29

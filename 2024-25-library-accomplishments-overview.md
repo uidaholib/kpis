@@ -6,6 +6,8 @@ layout: about
 
 # University of Idaho Library: 2024-25 Year of Achievement
 
+**(This is an AI Generated Summarization that was checked for accuracy)**
+
 ## Executive Summary
 
 The University of Idaho Library achieved exceptional success across all major areas in 2024-25, demonstrating remarkable growth, innovation, and impact. Through comprehensive digital infrastructure expansions, enhanced research support services, and sustained high-quality programming, the library positioned itself as an essential partner in the university's academic mission while delivering significant value to students and faculty.
@@ -20,7 +22,6 @@ The University of Idaho Library achieved exceptional success across all major ar
 ### Digital Innovation & Accessibility Excellence
 - **139 digital collections** now meet full accessibility standards (WCAG 2.1 AA) ([Digital Collections Team]({{ '/teams.html#digital-collections-team' | relative_url }}))
 - **77,713 total digital items** representing steady growth with 2,220 new additions in 2025
-- **98.5% increase** in digital collections engagement between Fall and Spring semesters
 - **Comprehensive catalog enhancement** with over 10,000 new items systematically added ([DA Unit]({{ '/units.html#discovery-and-access-unit-dau' | relative_url }}))
 
 ### Research & Scholarship Excellence
@@ -51,10 +52,10 @@ The [REL Unit]({{ '/units.html#research-and-experiential-learning-unit-rel' | re
 
 ## Key Performance Indicators: 2025 Highlights
 
-### Digital Engagement Growth
-- **153,771 total web users** in FY25 showing strong online presence ([Web Analytics]({{ '/web-analytics.html' | relative_url }}))
-- **4.25 views per user** maintaining excellent engagement depth ([Web Analytics]({{ '/web-analytics.html' | relative_url }}))
-- **54.31% engagement rate** across all library digital properties ([Web Analytics]({{ '/web-analytics.html' | relative_url }}))
+### Web Engagement Growth
+- **153,771 total web users** in FY25 showing strong online presence ([Web Analytics]({{ '/web.html' | relative_url }}))
+- **4.25 views per user** maintaining excellent engagement depth ([Web Analytics]({{ '/web.html' | relative_url }}))
+- **54.31% engagement rate** across all library digital properties ([Web Analytics]({{ '/web.html' | relative_url }}))
 
 ### Instruction Program Evolution  
 - **540 total sessions** in 2024-25 representing significant program expansion ([Instruction KPIs]({{ '/instruction.html' | relative_url }}))
@@ -83,12 +84,6 @@ The [REL Unit]({{ '/units.html#research-and-experiential-learning-unit-rel' | re
 - **132 hosted events** serving diverse campus constituencies ([Physical Spaces Team]({{ '/teams.html#physical-spaces-team' | relative_url }}))
 - **Strong departmental partnerships** maintained across all academic areas ([Liaisons Team]({{ '/teams.html#liaisons-team' | relative_url }}))
 
-## Looking Forward
 
-The University of Idaho Library's 2024-25 achievements demonstrate exceptional adaptability, innovation, and commitment to excellence. From implementing cutting-edge accessibility standards to expanding research discovery tools, from completing major facility renovations to launching innovative educational programs, the library has established itself as an indispensable partner in the university's academic mission.
-
-The comprehensive success across teams and units—spanning [technical services]({{ '/teams.html#access-and-technical-services-ats-team' | relative_url }}), [digital initiatives]({{ '/units.html#digital-scholarship-and-open-strategies-unit-dsos' | relative_url }}), [research support]({{ '/teams.html#research-impact-team' | relative_url }}), [instruction programs]({{ '/teams.html#instruction-team' | relative_url }}), and [student engagement]({{ '/teams.html#student-engagement-team' | relative_url }})—reflects a mature, collaborative organization ready to meet future challenges while maintaining its commitment to transformative library service.
-
-The year's accomplishments showcase not just operational excellence, but a culture of innovation, collaboration, and genuine commitment to student and faculty success that positions the library for continued leadership and impact.
 
 *For detailed information about specific team accomplishments, explore our [Teams]({{ '/teams.html' | relative_url }}) and [Units]({{ '/units.html' | relative_url }}) pages.*
