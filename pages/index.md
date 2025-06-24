@@ -4,6 +4,7 @@ title: Library KPIs and Organizational Overview
 permalink: /
 ---
 
+
 <div class="row">
 <div class="col-md-8 offset-md-2">
 <h1>{{page.title}}</h1>
@@ -14,7 +15,7 @@ permalink: /
 {% assign teamlink = '/teams.html' |relative_url %}
 {% assign unitlink = '/units.html' |relative_url %}
 
-
+{% include feature/alert.html text="It's been a great year! Check out the library's [<i class='bi bi-balloon'></i>2024-2045 Achievement report](accomplishments24-25.html)" color="info" align="center" %}
 
 <h2>Overview Documents</h2>
 

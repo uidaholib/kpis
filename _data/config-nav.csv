@@ -1,5 +1,5 @@
 display_name,stub,dropdown_parent,target_blank
-<i class='bi bi-balloon-heart'></i> <span class='visually-hidden'>2024-25 Achievements</span>,/accomplishments24-25.html
+
 Teams,/teams.html
 Units,/units.html
 Docs
@@ -13,3 +13,6 @@ How To Edit or Create a Data file,/docs/data.html,Docs
 Forms
 All Instruction Form,https://forms.office.com/r/tkRLEjbHGv,Forms
 Faculty Scholarship Wins,https://forms.office.com/r/Dy6sfAWNmd,Forms
+Grant Approval Form,https://forms.office.com/r/jhP3JcQnBW,Forms
+Reports,
+<i class='bi bi-balloon'></i>2024-25 Achievements,/accomplishments24-25.html,Reports

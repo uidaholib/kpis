@@ -4,9 +4,13 @@ permalink: /accomplishments24-25.html
 layout: about
 ---
 
-# University of Idaho Library: 2024-25 Year of Achievement
+# <i class='bi bi-balloon'></i> University of Idaho Library: 2024-25 Achievements <i class='bi bi-balloon'></i>
 
-**(This is an AI Generated Summarization that was checked for accuracy)**
+The University of Idaho Library went through its second full year in its recently reorganized structure. Faculty and staff from the library collaborated across units, departments, and teams to accomplish set goals, meet new challenges, and develop innovative approaches to their work. 
+
+We accomplished a great deal. See below for some of the highlights.[^1]
+
+For detailed information about specific team/unit accomplishments and final reports on their progress, explore our [Teams]({{ '/teams.html' | relative_url }}) and [Units]({{ '/units.html' | relative_url }}) pages. A [compilation of all reports]({{'assets/pdf24_25/all.pdf' | relative_url}}) is also available. 
 
 ## Executive Summary
 
@@ -85,5 +89,5 @@ The [REL Unit]({{ '/units.html#research-and-experiential-learning-unit-rel' | re
 - **Strong departmental partnerships** maintained across all academic areas ([Liaisons Team]({{ '/teams.html#liaisons-team' | relative_url }}))
 
 
-
-*For detailed information about specific team accomplishments, explore our [Teams]({{ '/teams.html' | relative_url }}) and [Units]({{ '/units.html' | relative_url }}) pages.*
+{:.mt-5}
+[^1]: *Highlights above were generated using AI (Claude) based on team/unit reports and site metrics.*
