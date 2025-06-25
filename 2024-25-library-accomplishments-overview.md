@@ -25,7 +25,7 @@ The University of Idaho Library achieved exceptional success across all major ar
 
 ### Digital Innovation & Accessibility Excellence
 - **139 digital collections** now meet full accessibility standards (WCAG 2.1 AA) ([Digital Collections Team]({{ '/teams.html#digital-collections-team' | relative_url }}))
-- **77,713 total digital items** representing steady growth with 2,220 new additions in 2025
+- **77,713 total digital items** representing steady growth with 12,043 new additions in 2024-2025
 - **Comprehensive catalog enhancement** with over 10,000 new items systematically added ([DA Unit]({{ '/units.html#discovery-and-access-unit-dau' | relative_url }}))
 
 ### Research & Scholarship Excellence
