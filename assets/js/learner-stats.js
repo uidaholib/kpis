@@ -56,11 +56,11 @@ class LearnerStats {
 
     // Generate all semester periods from Fall 2016 to Fall 2024
     const periods = [];
-    for (let year = 2016; year <= 2025; year++) {
+    for (let year = 2016; year <= 2026; year++) {
       if (year > 2016) { // Start with Fall 2016, so only add Spring for subsequent years
         periods.push(`Spring ${year}`);
       }
-       if (year < 2025) { // Start with Fall 2016, so only add Spring for subsequent years
+       if (year < 2026) { // Start with Fall 2016, so only add Spring for subsequent years
            periods.push(`Fall ${year}`);
         }
     }
