@@ -4,8 +4,8 @@ layout: dashboard
 permalink: /special-collections.html
 dashboard:
   data_sources:
-    yearly: /kpidata/special-collections.csv
-  default_frequency: yearly
+    biannual: /kpidata/special-collections.csv
+  default_frequency: biannual
   default_tab: chart
   charts:
     - type: bar
@@ -27,8 +27,4 @@ dashboard:
         - row_index: 4
         - row_index: 5
         - row_index: 6
-    - type: bar
-      title: Linear Feet
-      datasets:
-        - row_index: 7
 ---
