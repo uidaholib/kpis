@@ -4,8 +4,16 @@ permalink: /instruction-prep.html
 title: Instruction Statistics
 ---
 
-<div class="row">
-  
+<div class="row mb-3">
+  <div class="col-12 text-end">
+    <button id="downloadCsvBtn" class="btn btn-outline-primary btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+      </svg>
+      Download CSV
+    </button>
+  </div>
 </div>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -38,6 +46,85 @@ title: Instruction Statistics
     stats.init();
     const charts = new InstructionCharts('instructionCharts');
     charts.init();
+
+    // CSV Download functionality
+    document.getElementById('downloadCsvBtn').addEventListener('click', function() {
+      // Wait for stats to be loaded
+      if (!stats.stats) {
+        alert('Data is still loading. Please try again in a moment.');
+        return;
+      }
+
+      const rows = [
+        { label: 'Total Sessions', key: 'totalSessions' },
+        { label: 'Total Attendees', key: 'totalAttendees' },
+        { label: 'Total Course Based Sessions', key: 'courseBasedSessions' },
+        { label: 'Total Course Based Attendees', key: 'courseBasedAttendees' },
+        { label: 'Unique Course Based Attendees', key: 'uniqueCourseBasedAttendees' },
+        { label: 'In-Person Sessions', key: 'inPersonStats', subkey: 'sessions' },
+        { label: 'In-Person Attendees', key: 'inPersonStats', subkey: 'attendees' },
+        { label: 'Online Sessions', key: 'onlineStats', subkey: 'sessions' },
+        { label: 'Online Attendees', key: 'onlineStats', subkey: 'attendees' },
+        { label: 'Hybrid Sessions', key: 'hybridStats', subkey: 'sessions' },
+        { label: 'Hybrid Attendees', key: 'hybridStats', subkey: 'attendees' },
+        { label: 'Asynchronous Sessions', key: 'asyncStats', subkey: 'sessions' },
+        { label: 'Asynchronous Attendees', key: 'asyncStats', subkey: 'attendees' },
+        { label: 'English 101 and 102 Sessions', key: 'english101102', subkey: 'sessions' },
+        { label: 'English 101 and 102 Attendees', key: 'english101102', subkey: 'attendees' },
+        { label: 'Upper Division Sessions', key: 'upperDivision', subkey: 'sessions' },
+        { label: 'Upper Division Attendees', key: 'upperDivision', subkey: 'attendees' },
+        { label: 'Lower Division Sessions', key: 'lowerDivision', subkey: 'sessions' },
+        { label: 'Lower Division Attendees', key: 'lowerDivision', subkey: 'attendees' },
+        { label: 'K-12 Sessions', key: 'k12', subkey: 'sessions' },
+        { label: 'K-12 Attendees', key: 'k12', subkey: 'attendees' },
+        { label: 'Total Workshop Sessions', key: 'workshopSessions' },
+        { label: 'Total Workshop Attendees', key: 'workshopAttendees' },
+        { label: 'Renfrew Sessions', key: 'renfrewWorkshops', subkey: 'sessions' },
+        { label: 'Renfrew Attendees', key: 'renfrewWorkshops', subkey: 'attendees' },
+        { label: 'ETIL Sessions', key: 'etilWorkshops', subkey: 'sessions' },
+        { label: 'ETIL Attendees', key: 'etilWorkshops', subkey: 'attendees' },
+        { label: 'Tech Talks Sessions', key: 'techTalks', subkey: 'sessions' },
+        { label: 'Tech Talks Attendees', key: 'techTalks', subkey: 'attendees' },
+        { label: 'Grad Student Essentials Sessions', key: 'gradEssentials', subkey: 'sessions' },
+        { label: 'Grad Student Essentials Attendees', key: 'gradEssentials', subkey: 'attendees' },
+        { label: 'MILL Workshops Sessions', key: 'millWorkshops', subkey: 'sessions' },
+        { label: 'MILL Workshops Attendees', key: 'millWorkshops', subkey: 'attendees' },
+        { label: 'ACRL: Synchronous Presentations', key: 'acrlSynchronous', subkey: 'sessions' },
+        { label: 'ACRL: Synchronous Attendance', key: 'acrlSynchronous', subkey: 'attendees' },
+        { label: 'ACRL: Asynchronous Presentations', key: 'acrlAsynchronous', subkey: 'sessions' },
+        { label: 'ACRL: Asynchronous Attendance', key: 'acrlAsynchronous', subkey: 'attendees' },
+        { label: 'ACRL: All Group Presentations', key: 'acrlAllGroups', subkey: 'sessions' },
+        { label: 'ACRL: All Group Attendance', key: 'acrlAllGroups', subkey: 'attendees' },
+        { label: 'ACRL: Consultations/RAP', key: 'consultationsRAP' }
+      ];
+
+      // Build CSV header
+      const headers = ['KPI Area', ...stats.stats.map(s => s.period)];
+      
+      // Build CSV rows
+      const csvRows = rows.map(row => {
+        const values = stats.stats.map(stat => {
+          return row.subkey ? (stat[row.key]?.[row.subkey] || 0) : (stat[row.key] || 0);
+        });
+        return [row.label, ...values];
+      });
+
+      // Combine header and rows
+      const csvContent = [headers, ...csvRows]
+        .map(row => row.map(cell => `"${cell}"`).join(','))
+        .join('\n');
+
+      // Create and trigger download
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'instruction-statistics.csv');
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   });
 
 </script>

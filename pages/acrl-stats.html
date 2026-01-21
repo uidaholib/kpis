@@ -1,0 +1,235 @@
+---
+layout: page
+permalink: /acrl-stats.html
+title: ACRL Statistics
+---
+
+<div class="row mb-3">
+  <div class="col-12 text-end">
+    <button id="downloadCsvBtn" class="btn btn-outline-primary btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+      </svg>
+      Download CSV
+    </button>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h5 class="card-title mb-0">ACRL Statistics: Fiscal Year 2024-2025</h5>
+    <small class="text-muted">July 1, 2024 – June 30, 2025</small>
+  </div>
+  <div class="card-body">
+    <div id="acrlStats">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+<script>
+  class ACRLStats {
+    constructor(containerId) {
+      this.container = document.getElementById(containerId);
+      this.stats = null;
+      this.fiscalYearStart = new Date(2024, 6, 1); // July 1, 2024
+      this.fiscalYearEnd = new Date(2025, 5, 30, 23, 59, 59); // June 30, 2025
+    }
+
+    async init() {
+      try {
+        const response = await fetch('/kpidata/instruction-from-form.csv');
+        const csvText = await response.text();
+        await this.processData(csvText);
+        this.render();
+      } catch (error) {
+        console.error('Error loading data:', error);
+        this.container.innerHTML = '<div class="alert alert-danger" role="alert">Error loading data</div>';
+      }
+    }
+
+    async processData(csvText) {
+      const parsedData = Papa.parse(csvText, {
+        header: true,
+        dynamicTyping: true,
+        skipEmptyLines: true
+      }).data;
+
+      // Helper function to parse dates
+      const parseDate = (dateStr) => {
+        if (!dateStr) return null;
+        const date = new Date(dateStr);
+        return isNaN(date.getTime()) ? null : date;
+      };
+
+      // Process each row
+      const processedData = parsedData.map(row => ({
+        ...row,
+        date: parseDate(row.date),
+        count: parseInt(row.count) || 0,
+        number_of_sessions: parseInt(row.number_of_sessions) || 1,
+        format: (row.format || '').trim().toLowerCase(),
+        type: (row.type || '').trim(),
+        category: (row.category || '').trim()
+      }));
+
+      // Filter to fiscal year
+      const fiscalYearData = processedData.filter(row => 
+        row.date && row.date >= this.fiscalYearStart && row.date <= this.fiscalYearEnd
+      );
+
+      console.log('Fiscal year data count:', fiscalYearData.length);
+
+      // Helper to check if a row is a RAP/consultation
+      const isRAP = (row) => {
+        const type = (row.type || '').toLowerCase();
+        const course = (row.course || '').toLowerCase();
+        const description = (row.description || '').toLowerCase();
+        return type.includes('rap') || course.includes('rap') || description.includes('rap');
+      };
+
+      // RAP/Consultations - look for RAP in type, course, or description
+      const consultations = fiscalYearData.filter(isRAP);
+
+      // Group presentations (excluding RAP/consultations)
+      const groupPresentations = fiscalYearData.filter(row => !isRAP(row));
+
+      // Synchronous group presentations (In-Person, Online, Hybrid - NOT Asynchronous)
+      const synchronous = groupPresentations.filter(row => 
+        row.format && row.format !== 'asynchronous'
+      );
+
+      // Asynchronous group presentations
+      const asynchronous = groupPresentations.filter(row => 
+        row.format && row.format === 'asynchronous'
+      );
+
+      // Calculate stats
+      const synchronousPresentations = synchronous.reduce((sum, row) => sum + (row.number_of_sessions || 1), 0);
+      const synchronousAttendance = synchronous.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0);
+      
+      const asynchronousPresentations = asynchronous.reduce((sum, row) => sum + (row.number_of_sessions || 1), 0);
+      const asynchronousAttendance = asynchronous.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0);
+
+      this.stats = {
+        synchronousPresentations: synchronousPresentations,
+        synchronousAttendance: synchronousAttendance,
+        
+        asynchronousPresentations: asynchronousPresentations,
+        asynchronousAttendance: asynchronousAttendance,
+        
+        // All group presentations = synchronous + asynchronous
+        allGroupPresentations: synchronousPresentations + asynchronousPresentations,
+        allGroupAttendance: synchronousAttendance + asynchronousAttendance,
+        
+        consultationsRAP: consultations.length,
+        
+        // Additional breakdown for reference
+        fiscalYearRecords: fiscalYearData.length
+      };
+    }
+
+    render() {
+      if (!this.stats) {
+        this.container.innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
+        return;
+      }
+
+      const html = `
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">ACRL Metric</th>
+              <th scope="col" class="text-end">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Number of synchronous presentations</td>
+              <td class="text-end">${this.stats.synchronousPresentations.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td>Total attendance at all synchronous presentations</td>
+              <td class="text-end">${this.stats.synchronousAttendance.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td>Number of asynchronous presentations</td>
+              <td class="text-end">${this.stats.asynchronousPresentations.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td>Total attendance at all asynchronous presentations</td>
+              <td class="text-end">${this.stats.asynchronousAttendance.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td>Number of all presentations to groups</td>
+              <td class="text-end">${this.stats.allGroupPresentations.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td>Total attendance at all presentations to groups</td>
+              <td class="text-end">${this.stats.allGroupAttendance.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td>Consultations/RAP</td>
+              <td class="text-end">${this.stats.consultationsRAP.toLocaleString()}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-muted small mt-3">
+          <em>Data based on ${this.stats.fiscalYearRecords.toLocaleString()} instruction records from July 1, 2024 to June 30, 2025.</em>
+        </p>
+      `;
+
+      this.container.innerHTML = html;
+    }
+
+    getCSVData() {
+      if (!this.stats) return null;
+      
+      return [
+        ['ACRL Metric', 'Value'],
+        ['Number of synchronous presentations', this.stats.synchronousPresentations],
+        ['Total attendance at all synchronous presentations', this.stats.synchronousAttendance],
+        ['Number of asynchronous presentations', this.stats.asynchronousPresentations],
+        ['Total attendance at all asynchronous presentations', this.stats.asynchronousAttendance],
+        ['Number of all presentations to groups', this.stats.allGroupPresentations],
+        ['Total attendance at all presentations to groups', this.stats.allGroupAttendance],
+        ['Consultations/RAP', this.stats.consultationsRAP]
+      ];
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const acrlStats = new ACRLStats('acrlStats');
+    acrlStats.init();
+
+    // CSV Download functionality
+    document.getElementById('downloadCsvBtn').addEventListener('click', function() {
+      if (!acrlStats.stats) {
+        alert('Data is still loading. Please try again in a moment.');
+        return;
+      }
+
+      const csvData = acrlStats.getCSVData();
+      const csvContent = csvData
+        .map(row => row.map(cell => `"${cell}"`).join(','))
+        .join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'acrl-stats-fy2024-25.csv');
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  });
+</script>

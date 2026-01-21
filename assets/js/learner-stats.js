@@ -21,11 +21,11 @@ class LearnerStats {
     const ranges = {
       'Fall': {
         start: new Date(year, 6, 1), // July 1
-        end: new Date(year, 11, 31) // December 31
+        end: new Date(year, 11, 31, 23, 59, 59) // December 31 end of day
       },
       'Spring': {
         start: new Date(year, 0, 1), // January 1
-        end: new Date(year, 5, 30) // June 30
+        end: new Date(year, 5, 30, 23, 59, 59) // June 30 end of day
       }
     };
     return ranges[semester];
@@ -67,14 +67,28 @@ class LearnerStats {
     
     const getStatsForPeriod = (startDate, endDate) => {
       const periodData = processedData.filter(row => 
-        row.date && row.date >= startDate && row.date < endDate
+        row.date && row.date >= startDate && row.date <= endDate
       );
 
-      const courseBased = periodData.filter(row => 
+      // Helper to check if a row is a RAP/consultation
+      const isRAP = (row) => {
+        const type = (row.type || '').toLowerCase();
+        const course = (row.course || '').toLowerCase();
+        const description = (row.description || '').toLowerCase();
+        return type.includes('rap') || course.includes('rap') || description.includes('rap');
+      };
+
+      // RAP/Consultations
+      const consultations = periodData.filter(isRAP);
+      
+      // Group presentations (excluding RAP)
+      const groupPresentations = periodData.filter(row => !isRAP(row));
+
+      const courseBased = groupPresentations.filter(row => 
         row.category && row.category.includes('Course-based Instruction')
       );
 
-      const workshops = periodData.filter(row => 
+      const workshops = groupPresentations.filter(row => 
         row.category && row.category.includes('Workshop/Presentation')
       );
 
@@ -94,13 +108,13 @@ class LearnerStats {
           const searchType = type.trim().toLowerCase();
           return rowType === searchType;
         });
-        console.log(`Workshop type "${type}":`, filtered);
         return {
           sessions: filtered.length,
           attendees: filtered.reduce((sum, row) => sum + (row.count || 0), 0)
         };
       };
 
+      // Format stats for course-based only (original behavior)
       const getFormatStats = (format) => {
         const filtered = courseBased.filter(row => (row.format || '').trim().toLowerCase() === format.toLowerCase());
         return {
@@ -108,6 +122,26 @@ class LearnerStats {
           attendees: filtered.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0)
         };
       };
+
+      // ACRL-style format stats for ALL group presentations (excluding RAP)
+      const getAllFormatStats = (format) => {
+        const filtered = groupPresentations.filter(row => (row.format || '').trim().toLowerCase() === format.toLowerCase());
+        return {
+          sessions: filtered.reduce((sum, row) => sum + (row.number_of_sessions || 1), 0),
+          attendees: filtered.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0)
+        };
+      };
+
+      // Synchronous = In-Person + Online + Hybrid (all formats except asynchronous)
+      const synchronousData = groupPresentations.filter(row => {
+        const format = (row.format || '').trim().toLowerCase();
+        return format && format !== 'asynchronous';
+      });
+      
+      const asynchronousData = groupPresentations.filter(row => {
+        const format = (row.format || '').trim().toLowerCase();
+        return format === 'asynchronous';
+      });
 
       return {
         totalSessions: periodData.reduce((sum, row) => sum + (row.number_of_sessions || 1), 0),
@@ -117,10 +151,26 @@ class LearnerStats {
         courseBasedAttendees: courseBased.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0),
         uniqueCourseBasedAttendees: courseBased.reduce((sum, row) => sum + (row.count || 0), 0),
         
+        // Course-based format stats (original)
         onlineStats: getFormatStats('online'),
         inPersonStats: getFormatStats('in-person'),
         hybridStats: getFormatStats('hybrid'),
         asyncStats: getFormatStats('asynchronous'),
+        
+        // ACRL-style stats (all presentations, excluding RAP)
+        acrlSynchronous: {
+          sessions: synchronousData.reduce((sum, row) => sum + (row.number_of_sessions || 1), 0),
+          attendees: synchronousData.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0)
+        },
+        acrlAsynchronous: {
+          sessions: asynchronousData.reduce((sum, row) => sum + (row.number_of_sessions || 1), 0),
+          attendees: asynchronousData.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0)
+        },
+        acrlAllGroups: {
+          sessions: groupPresentations.reduce((sum, row) => sum + (row.number_of_sessions || 1), 0),
+          attendees: groupPresentations.reduce((sum, row) => sum + ((row.count || 0) * (row.number_of_sessions || 1)), 0)
+        },
+        consultationsRAP: consultations.length,
         
         english101102: getCourseStats('English 101 and 102'),
         upperDivision: getCourseStats('Upper Division and/or discipline specific'),
@@ -188,7 +238,14 @@ class LearnerStats {
       { label: '- Grad Student Essentials Sessions', key: 'gradEssentials', subkey: 'sessions' },
       { label: '- Grad Student Essentials Attendees', key: 'gradEssentials', subkey: 'attendees' },
       { label: '- MILL Workshops Sessions', key: 'millWorkshops', subkey: 'sessions' },
-      { label: '- MILL Workshops Attendees', key: 'millWorkshops', subkey: 'attendees' }
+      { label: '- MILL Workshops Attendees', key: 'millWorkshops', subkey: 'attendees' },
+      { label: 'ACRL: Synchronous Presentations', key: 'acrlSynchronous', subkey: 'sessions' },
+      { label: 'ACRL: Synchronous Attendance', key: 'acrlSynchronous', subkey: 'attendees' },
+      { label: 'ACRL: Asynchronous Presentations', key: 'acrlAsynchronous', subkey: 'sessions' },
+      { label: 'ACRL: Asynchronous Attendance', key: 'acrlAsynchronous', subkey: 'attendees' },
+      { label: 'ACRL: All Group Presentations', key: 'acrlAllGroups', subkey: 'sessions' },
+      { label: 'ACRL: All Group Attendance', key: 'acrlAllGroups', subkey: 'attendees' },
+      { label: 'ACRL: Consultations/RAP', key: 'consultationsRAP' }
     ];
 
     const html = `

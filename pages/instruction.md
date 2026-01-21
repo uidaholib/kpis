@@ -35,19 +35,30 @@ dashboard:
         - row_index: 16
         - row_index: 18
         - row_index: 20
+    - type: line
       title: Workshop Sessions by Type
       datasets:
         - row_index: 23
+          color: '#4363d8'
         - row_index: 25
+          color: '#3cb44b'
         - row_index: 27
+          color: '#911eb4'
         - row_index: 29
+          color: '#46f0f0'
         - row_index: 31
+          color: '#f032e6'
     - type: line
       title: Workshop Attendees by Type
       datasets:
         - row_index: 24
+          color: '#4363d8'
         - row_index: 26
+          color: '#3cb44b'
         - row_index: 28
+          color: '#911eb4'
         - row_index: 30
+          color: '#46f0f0'
         - row_index: 32
+          color: '#f032e6'
 ---
