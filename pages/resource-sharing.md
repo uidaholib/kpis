@@ -9,23 +9,33 @@ dashboard:
   default_tab: chart
   charts:
     - type: line
-      title: ILL Borrowing and Loaning
+      title: ILL Borrowing
       datasets:
         - row_index: 0
         - row_index: 2
     - type: line
-      title: ILL Fill Rates
+      title: ILL Borrowing Fill Rates
       datasets:
         - row_index: 1
         - row_index: 3
     - type: line
-      title: Summit Borrowing and Loaning
+      title: ILL Loaning
       datasets:
         - row_index: 4
         - row_index: 6
     - type: line
-      title: Summit Fill Rates
+      title: ILL Loaning Fill Rates
       datasets:
         - row_index: 5
         - row_index: 7
+    - type: line
+      title: Summit Borrowing and Loaning
+      datasets:
+        - row_index: 8
+        - row_index: 10
+    - type: line
+      title: Summit Fill Rates
+      datasets:
+        - row_index: 9
+        - row_index: 11
 ---

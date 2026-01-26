@@ -1,5 +1,5 @@
 ---
-title: Cost Per Use - Electronic Resources
+title: Cost Per Use - Electronic Resources (Fiscal Year)
 layout: dashboard
 permalink: /cost-per-use.html
 dashboard:
@@ -17,7 +17,7 @@ dashboard:
       datasets:
         - row_index: 1
     - type: line
-      title: Streaming Video Cost Per Use (Fiscal Year Data)
+      title: Streaming Video Cost Per Use
       datasets:
         - row_index: 2
 ---
