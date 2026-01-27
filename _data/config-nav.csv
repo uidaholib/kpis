@@ -1,7 +1,11 @@
 display_name,stub,dropdown_parent,target_blank
 
-Teams,/teams.html
-Units,/units.html
+Teams
+2025-2026,/teams2025-2026.html,Teams
+2024-2025,/teams2024-2025.html,Teams
+Units
+2025-2026,/units2025-2026.html,Units
+2024-2025,/units2024-2025.html,Units
 Docs
 Annual Manual,/assets/pdf/LibraryAnnualManual24-25.pdf,Docs,true
 Library Employee Libguide,https://libguides.uidaho.edu/c.php?g=866557&p=6217071,Docs,true

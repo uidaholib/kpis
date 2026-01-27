@@ -12,18 +12,32 @@ permalink: /
 <p>This site provides an interactive gallery of the University of Idaho Library's Key Performance Indicators (KPIs) together with an overview of the Teams, Units, and Department that drive the KPIs.</p>
 
 {% assign manuallink = '/assets/pdf/LibraryAnnualManual24-25.pdf' |relative_url %}
-{% assign teamlink = '/teams.html' |relative_url %}
-{% assign unitlink = '/units.html' |relative_url %}
+{% assign teams2526link = '/teams2025-2026.html' |relative_url %}
+{% assign teams2425link = '/teams2024-2025.html' |relative_url %}
+{% assign units2526link = '/units2025-2026.html' |relative_url %}
+{% assign units2425link = '/units2024-2025.html' |relative_url %}
 
-{% include feature/alert.html text="It's been a great year! Check out the library's [<i class='bi bi-balloon'></i>2024-2025 Achievement report](accomplishments24-25.html)" color="info" align="center" %}
+<!--{% include feature/alert.html text="It's been a great year! Check out the library's [<i class='bi bi-balloon'></i>2024-2025 Achievement report](accomplishments24-25.html)" color="info" align="center" %}-->
 
 <h2>Overview Documents</h2>
 
 {% include feature/button.html text="Annual Manual" link=manuallink color="outline-success btn-lg my-3" %}
 
-{% include feature/button.html text="Teams Overview" link=teamlink color="outline-success btn-lg " %} 
+<button class="btn btn-outline-success btn-lg dropdown-toggle" type="button" id="teamsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+  Teams Overview
+</button>
+<ul class="dropdown-menu" aria-labelledby="teamsDropdown">
+  <li><a class="dropdown-item" href="{{ teams2526link }}">2025-2026</a></li>
+  <li><a class="dropdown-item" href="{{ teams2425link }}">2024-2025</a></li>
+</ul>
 
-{% include feature/button.html text="Unit Overview" link=unitlink color="outline-success btn-lg " %} 
+<button class="btn btn-outline-success btn-lg dropdown-toggle" type="button" id="unitsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+  Units Overview
+</button>
+<ul class="dropdown-menu" aria-labelledby="unitsDropdown">
+  <li><a class="dropdown-item" href="{{ units2526link }}">2025-2026</a></li>
+  <li><a class="dropdown-item" href="{{ units2425link }}">2024-2025</a></li>
+</ul> 
 
 <button class="btn btn-outline-secondary btn-lg dropdown-toggle" type="button" id="docsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
   Docs
