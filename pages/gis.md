@@ -6,7 +6,7 @@ dashboard:
   data_sources:
     yearly: /kpidata/gis-yearly.csv
     monthly: /kpidata/gis-monthly.csv
-  default_frequency: yearly
+  default_frequency: monthly
   default_tab: chart
   table_columns:
     - Unique Users	
