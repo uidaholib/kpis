@@ -13,16 +13,16 @@ import glob
 # Define your data parameters here:
 
 # Year for the data (e.g., 2025, 2026, etc.)
-DATA_YEAR = 2025
+DATA_YEAR = 2026
 
 # Starting month number (1=January, 2=February, etc.)
-START_MONTH = 6
+START_MONTH = 1
 
 # Ending month number (1=January, 2=February, etc.) 
-END_MONTH = 12
+END_MONTH = 5
 
 # Subfolder name within kpidata/webexports/ containing the CSV files
-EXPORT_FOLDER = "Jun_Dec2025"
+EXPORT_FOLDER = "Jan_May2026"
 
 # ========================================
 
