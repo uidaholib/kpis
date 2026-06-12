@@ -17,7 +17,7 @@ permalink: /
 {% assign units2526link = '/units2025-2026.html' |relative_url %}
 {% assign units2425link = '/units2024-2025.html' |relative_url %}
 
-<!--{% include feature/alert.html text="It's been a great year! Check out the library's [<i class='bi bi-balloon'></i>2024-2025 Achievement report](accomplishments24-25.html)" color="info" align="center" %}-->
+{% include feature/alert.html text="It's been a great year! Check out the library's [<i class='bi bi-balloon'></i>2025-2026 Achievement report](accomplishments25-26.html)" color="info" align="center" %}
 
 <h2>Overview Documents</h2>
 
