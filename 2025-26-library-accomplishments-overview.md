@@ -14,12 +14,12 @@ For the full story, explore our [Teams]({{ '/teams2025-2026.html' | relative_url
 
 ## 🌟 Executive Summary
 
-The University of Idaho Library had a standout 2025-26. We crossed **$1,000,000 in student savings** through Course Reserves, turned the Studio into a campus destination, spent down our entire open-access publishing fund to lift up local scholarship, and made our digital collections dramatically more accessible. When an unexpected wave of community research need arrived, our archivists stepped up and became a trusted statewide resource. Through it all, the library kept doing what it does best: connecting people to the resources, spaces, and expertise that power learning and discovery. 💪
+The University of Idaho Library had a standout 2025-26. We grew our Course Reserves program to its highest use yet, turned the Studio into a campus destination, spent down our entire open-access publishing fund to lift up local scholarship, and made our digital collections dramatically more accessible. When an unexpected wave of community research need arrived, our archivists stepped up and became a trusted statewide resource. Through it all, the library kept doing what it does best: connecting people to the resources, spaces, and expertise that power learning and discovery. 💪
 
 ## 🏆 Major Accomplishments by Impact Area
 
 ### 💸 Student Success & Affordability
-- **Course Reserves crossed $1,000,000 in student savings** across **237 courses** — up from ~$900,000 across 194 courses the year before. This is the library's mission in its most measurable form. ([Access & Engagement]({{ '/units2025-2026.html' | relative_url }}))
+- **Course Reserves hit record use**, reaching **542 students across 130 course sections** in spring — the program's strongest semester yet — with physical reserve circulation climbing to 316 and 4,476 electronic reserve checkouts, putting required materials directly into students' hands at no cost. 📚 ([Course Reserves]({{ '/course-reserves.html' | relative_url }}))
 - **Loaner laptops expanded from 28 to 80+**, and the unit surfaced the full scale of equipment lending: **6,302 checkouts** across the year. 💻
 - **$202,724 in subscription savings** identified by the Collections Team through evidence-based, cost-per-use analysis — renewing high-value resources (avg CPU $9.65) while trimming low-value ones (avg CPU $32.65). ([Collections]({{ '/teams2025-2026.html' | relative_url }}))
 
